@@ -1,10 +1,12 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns } from "../../datatablesource";
+// import { userColumns } from "../../datatablesource";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { ArticleColumns } from "../table/articletablesource";
+import { Penarticletablesource } from "../table/penarticletablesource";
 
-const Datatable = () => {
+const PendingArticleTable = () => {
   const [data, setData] = useState([]);
 
   // const handleDelete = (id) => {
@@ -13,10 +15,11 @@ const Datatable = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = "http://3.75.129.124:3000/admin-user/getAll";
+      const url = "http://3.75.129.124:3000/admin-article/pendingArticles";
       const response = await fetch(url);
       const data = await response.json();
-      setData(data.data);
+      setData(data.articles);
+      console.log(data.articles);
     };
     fetchData();
   }, []);
@@ -25,7 +28,7 @@ const Datatable = () => {
     {
       field: "action",
       headerName: "Action",
-      width: 200,
+      width: 350,
       renderCell: (params) => {
         return (
           <div className="cellAction">
@@ -38,6 +41,15 @@ const Datatable = () => {
             >
               Delete
             </div>
+            <Link to={`/users/${params.row._id}`} style={{ textDecoration: "none" }}>
+              <div className="viewButton">Approve</div>
+            </Link>
+            <div
+              className="deleteButton"
+              // onClick={() => handleDelete(params.row._id)}
+            >
+              Reject
+            </div>
           </div>
         );
       },
@@ -47,7 +59,7 @@ const Datatable = () => {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        User
+        Pending Articles
         <Link to="/users/new" className="link">
           Add New
         </Link>
@@ -55,7 +67,7 @@ const Datatable = () => {
       <DataGrid
         className="datagrid"
         rows={data}
-        columns={userColumns.concat(actionColumn)}
+        columns={Penarticletablesource.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}
         checkboxSelection
@@ -65,4 +77,4 @@ const Datatable = () => {
   );
 };
 
-export default Datatable;
+export default PendingArticleTable;

@@ -3,20 +3,23 @@ import { DataGrid } from "@mui/x-data-grid";
 import { userColumns } from "../../datatablesource";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { dealColumns } from "../table/dealtablesource";
 
-const Datatable = () => {
+const DealDataTable = () => {
   const [data, setData] = useState([]);
 
-  // const handleDelete = (id) => {
-  //   setData(data.filter((item) => item._id !== id));
-  // };
+  const handleDelete = (id) => {
+    // setData(data.filter((item) => item._id !== id));
+    // console.log(id);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = "http://3.75.129.124:3000/admin-user/getAll";
+      const url = "http://3.75.129.124:3000/admin-deal/AllDeals";
       const response = await fetch(url);
       const data = await response.json();
-      setData(data.data);
+      console.log(data.deals);
+      setData(data.deals);
     };
     fetchData();
   }, []);
@@ -34,7 +37,7 @@ const Datatable = () => {
             </Link>
             <div
               className="deleteButton"
-              // onClick={() => handleDelete(params.row._id)}
+              onClick={() => handleDelete(params.row._id)}
             >
               Delete
             </div>
@@ -47,15 +50,12 @@ const Datatable = () => {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        User
-        <Link to="/users/new" className="link">
-          Add New
-        </Link>
+        Deal
       </div>
       <DataGrid
         className="datagrid"
         rows={data}
-        columns={userColumns.concat(actionColumn)}
+        columns={dealColumns}
         pageSize={9}
         rowsPerPageOptions={[9]}
         checkboxSelection
@@ -65,4 +65,4 @@ const Datatable = () => {
   );
 };
 
-export default Datatable;
+export default DealDataTable;

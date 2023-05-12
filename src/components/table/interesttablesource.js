@@ -1,26 +1,26 @@
-export const userColumns = [
+export const InterestColumns = [
   { field: "id", headerName: "ID", width: 70 },
   {
-    field: "user",
-    headerName: "User",
-    width: 300,
+    field: "InterestNames",
+    headerName: "Interest Name",
+    width: 230,
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
-          <img className="cellImg" src={params.row.image} alt="avatar" />
-          {params.row.username}
+          {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}
+          {params.row.title}
         </div>
       );
     },
   },
   {
-    field: "email",
-    headerName: "Email",
+    field: "Createdat",
+    headerName: "Created at",
     width: 500,
     renderCell: (params) => {
       return (
         <div className={`cellWithStatus ${params.row.status}`}>
-          {params.row.email}
+          {params.row.createdAt}
         </div>
       );
     },

@@ -8,27 +8,25 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useEffect, useState } from "react";
 
-const List = () => {
+const UList = () => {
   const [data, setData] = useState([]);
-  
   useEffect(async () => {
-    const url = "http://3.75.129.124:3000/admin-user/getAll";
+    const url = "http://3.75.129.124:3000/admin-deal/AllDeals";
     const response = await fetch(url);
     const jsonData = await response.json();
-    setData(jsonData.data);
+    setData(jsonData.deals);
   }, []);
-
   return (
     <TableContainer component={Paper} className="table">
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell className="tableCell">#</TableCell>
-            <TableCell className="tableCell">Product</TableCell>
-            <TableCell className="tableCell">Customer</TableCell>
-            <TableCell className="tableCell">Date</TableCell>
-            <TableCell className="tableCell">Amount</TableCell>
-            <TableCell className="tableCell">Payment Method</TableCell>
+            <TableCell className="tableCell">Person 1</TableCell>
+            <TableCell className="tableCell">Person 2</TableCell>
+            <TableCell className="tableCell">Article 1</TableCell>
+            <TableCell className="tableCell">Article 2</TableCell>
+            <TableCell className="tableCell">Surcharge</TableCell>
             <TableCell className="tableCell">Status</TableCell>
           </TableRow>
         </TableHead>
@@ -38,16 +36,16 @@ const List = () => {
               <TableCell className="tableCell">{b+1}</TableCell>
               <TableCell className="tableCell">
                 <div className="cellWrapper">
-                  <img src={row.img} alt="" className="image" />
-                  {row.product}
+                  {/* <img src={row.img} alt="" className="image" /> */}
+                  {row.person1}
                 </div>
               </TableCell>
-              <TableCell className="tableCell">{row.customer}</TableCell>
-              <TableCell className="tableCell">{row.date}</TableCell>
-              <TableCell className="tableCell">{row.amount}</TableCell>
-              <TableCell className="tableCell">{row.method}</TableCell>
+              <TableCell className="tableCell">{row.person2}</TableCell>
+              <TableCell className="tableCell">{row.article1}</TableCell>
+              <TableCell className="tableCell">{row.article2}</TableCell>
+              <TableCell className="tableCell">{row.surcharge}</TableCell>
               <TableCell className="tableCell">
-                <span className={`status ${row.status}`}>{row.status}</span>
+                <span className={'status'}>{row.status}</span>
               </TableCell>
             </TableRow>
           ))}
@@ -57,4 +55,4 @@ const List = () => {
   );
 };
 
-export default List;
+export default UList;
