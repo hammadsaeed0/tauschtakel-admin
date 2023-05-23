@@ -16,7 +16,7 @@ const Single = () => {
   const [image , setImage] = useState()
   const {userId} = useParams();
   useEffect( async () => {
-    const url = `http://3.75.129.124:3000/admin-user/${userId}`;
+    const url = `https://cdn.tauschtakel.de:3000/admin-user/${userId}`;
 
 const response = await fetch(url);
 

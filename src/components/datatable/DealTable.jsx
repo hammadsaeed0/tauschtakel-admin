@@ -15,7 +15,7 @@ const DealDataTable = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = "http://3.75.129.124:3000/admin-deal/AllDeals";
+      const url = "https://cdn.tauschtakel.de:3000/admin-deal/AllDeals";
       const response = await fetch(url);
       const data = await response.json();
       console.log(data.deals);

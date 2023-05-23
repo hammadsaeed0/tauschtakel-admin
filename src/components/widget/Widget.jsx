@@ -11,7 +11,7 @@ const Widget = ({ type }) => {
   const [data, setData] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
-      const url = "http://3.75.129.124:3000/admin-admin/meta";
+      const url = "https://cdn.tauschtakel.de:3000/admin-admin/meta";
       const response = await fetch(url);
       const data = await response.json();
       setData(data);
