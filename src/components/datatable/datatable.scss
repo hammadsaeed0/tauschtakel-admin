@@ -1,5 +1,20 @@
+.mainContainer {
+  width: 100%;
+  height: 90%;
+  background-color: red;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+}
+.subDiv {
+  width: 70%;
+  height: 20%;
+  background-color: #000000;
+}
+
 .datatable {
-  height: 600px;
+  height: 85vh;
   padding: 20px;
   
   .datatableTitle{
@@ -21,6 +36,29 @@
       border-radius: 5px;
       cursor: pointer;
     }
+  }
+  .setBtn{
+    display: flex;
+    width: 20%;
+    margin-left: 30%;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .link2{
+    text-decoration: none;
+    color: red;
+    font-size: 16px;
+    font-weight: 400;
+    border: 1px solid red;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    
+    
+    
+  }
+  .btnAlign{
+    width: 30%;
   }
 
   .cellWithImg {
@@ -75,6 +113,13 @@
       border-radius: 5px;
       color: crimson;
       border: 1px dotted rgba(220, 20, 60, 0.6);
+      cursor: pointer;
+    }
+    .ApproveButton {
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: green;
+      border: 1px dotted rgba(0, 179, 24, 0.6);
       cursor: pointer;
     }
   }

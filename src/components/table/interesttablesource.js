@@ -16,7 +16,7 @@ export const InterestColumns = [
   {
     field: "Createdat",
     headerName: "Created at",
-    width: 500,
+    width: 400,
     renderCell: (params) => {
       return (
         <div className={`cellWithStatus ${params.row.status}`}>

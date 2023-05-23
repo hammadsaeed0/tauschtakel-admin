@@ -10,21 +10,17 @@ import InsertDataTable from "../../components/datatable/InsertTable";
 
 
 
-const Single = () => {
-  const [name , setName] = useState()
-  const [email , setEmail] = useState()
-  const [image , setImage] = useState()
-  const {userId} = useParams();
+const SingleInterest = () => {
+  const {productId} = useParams();
   useEffect( async () => {
-    const url = `http://3.75.129.124:3000/admin-user/${userId}`;
+    const url = `http://3.75.129.124:3000/admin-interest/${productId}`;
 
 const response = await fetch(url);
 
 const text = await response.text();
 let data = JSON.parse(text);
-setEmail(data.user.email)
-setImage(data.user.image)
-setName(data.user.username)
+console.log("-------->",data);
+
   }, [])
   
   return (
@@ -34,19 +30,19 @@ setName(data.user.username)
         <Navbar />
         <div className="top">
           <div className="left">
-            <div className="editButton">Edit</div>
+            <div className="editButton">Edit1</div>
             <h1 className="title">Information</h1>
             <div className="item">
               <img
-                src={image}
+                // src={image}
                 alt=""
                 className="itemImg"
               />
               <div className="details">
-                <h1 className="itemTitle">{name}</h1>
+                <h1 className="itemTitle">INter</h1>
                 <div className="detailItem">
                   <span className="itemKey">Email:</span>
-                  <span className="itemValue">{email}</span>
+                  <span className="itemValue">Inter</span>
                 </div>
               </div>
             </div>
@@ -64,4 +60,4 @@ setName(data.user.username)
   );
 };
 
-export default Single;
+export default SingleInterest;

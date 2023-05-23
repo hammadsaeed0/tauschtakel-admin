@@ -58,10 +58,12 @@ const Sidebar = () => {
             <span>Reports</span>
           </li>
           <p className="title">USEFUL</p>
+          <Link to="/notification" style={{ textDecoration: "none" }}>
           <li>
             <NotificationsNoneIcon className="icon" />
             <span>Notifications</span>
           </li>
+          </Link>
           <p className="title">SERVICE</p>
           <li>
             <SettingsSystemDaydreamOutlinedIcon className="icon" />
