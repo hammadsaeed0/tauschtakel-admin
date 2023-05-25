@@ -1,32 +1,39 @@
-import { Link } from "react-router-dom";
-
-export const userColumns = [
-  // { field: "id", headerName: "ID", width: 70 },
+export const InterestNotification = [
+  // { },
   {
-    field: "user",
-    headerName: "User",
-    width: 300,
+    field: "Title",
+    headerName: "Title",
+    width: 230,
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
-       
-          <img className="cellImg" src={params.row.image} alt="avatar" />
-   
-          <Link to={params.row._id}  style={{textDecoration: 'none', color:'gray'}}>
-          {params.row.username}
-          </Link>
+          {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}
+          {params.row.title}
         </div>
       );
     },
   },
   {
-    field: "email",
-    headerName: "Email",
-    width: 300,
+    field: "Text",
+    headerName: "Text",
+    width: 400,
+    renderCell: (params) => {
+      return (
+        <div className="cellWithImg">
+          {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}
+          {params.row.body}
+        </div>
+      );
+    },
+  },
+  {
+    field: "Createdat",
+    headerName: "Created at",
+    width: 250,
     renderCell: (params) => {
       return (
         <div className={`cellWithStatus ${params.row.status}`}>
-          {params.row.email}
+          {params.row.createdAt}
         </div>
       );
     },

@@ -7,29 +7,34 @@ import { ArticleColumns } from "../table/articletablesource";
 
 const Datatable = () => {
   const [data, setData] = useState([]);
+  const [title, setTile] = useState('Article');
+
 
   const handleApprove = async(id) => {
-    const url = 'https://cdn.tauschtakel.de:3000/admin-article/approvedArticles';
+    const url = 'http://3.75.129.124:3000/admin-article/approvedArticles';
 
 const response = await fetch(url);
 
 const text = await response.text();
 let data = JSON.parse(text)
 setData(data.articles)
+setTile("Approve Article")
   };
   const handlePending = async(id) => {
-    const url = 'https://cdn.tauschtakel.de:3000/admin-article/pendingArticles';
+    const url = 'http://3.75.129.124:3000/admin-article/pendingArticles';
 
 const response = await fetch(url);
 
 const text = await response.text();
 let data = JSON.parse(text)
 setData(data.articles)
+setTile("Pending Article")
+
   };
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = "https://cdn.tauschtakel.de:3000/admin-article/approvedArticles";
+      const url = "http://3.75.129.124:3000/admin-article/approvedArticles";
       const response = await fetch(url);
       const data = await response.json();
       setData(data.articles);
@@ -63,7 +68,7 @@ setData(data.articles)
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        Articles
+        {title}
         <div className="setBtn">
         <div className="link" onClick={() => handleApprove()}>
           Approved

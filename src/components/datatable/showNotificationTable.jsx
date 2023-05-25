@@ -5,8 +5,9 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { dealColumns } from "../table/dealtablesource";
 import { InterestColumns } from "../table/interesttablesource";
+import { InterestNotification } from "../table/interestNotification";
 
-const InsertDataTable = () => {
+const ShowNotificationTable = () => {
   const [data, setData] = useState([]);
 
 
@@ -14,27 +15,27 @@ const InsertDataTable = () => {
 
 
   const handleDelete = (id) => {
-    var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+//     var myHeaders = new Headers();
+// myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
-var urlencoded = new URLSearchParams();
-urlencoded.append("id", id);
+// var urlencoded = new URLSearchParams();
+// urlencoded.append("id", id);
 
-var requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  body: urlencoded,
-  redirect: 'follow'
-};
+// var requestOptions = {
+//   method: 'POST',
+//   headers: myHeaders,
+//   body: urlencoded,
+//   redirect: 'follow'
+// };
 
-fetch("http://3.75.129.124:3000/admin-interest/delete", requestOptions)
-  .then(response => response.text())
-  .then(result => fetchData())
-  .catch(error => console.log('error', error));
+// fetch("http://3.75.129.124:3000/admin-interest/delete", requestOptions)
+//   .then(response => response.text())
+//   .then(result => fetchData())
+//   .catch(error => console.log('error', error));
   };
 
 
-
+console.log(data);
 
 
 
@@ -42,7 +43,7 @@ fetch("http://3.75.129.124:3000/admin-interest/delete", requestOptions)
 
 
   const fetchData = async () => {
-    const url = "http://3.75.129.124:3000/admin-interest/getAll";
+    const url = "http://3.75.129.124:3000/admin-notification/getAll";
     const response = await fetch(url);
     const data = await response.json();
     setData(data.data);
@@ -80,12 +81,12 @@ fetch("http://3.75.129.124:3000/admin-interest/delete", requestOptions)
   return (
     <div className="datatable">
       <div className="datatableTitle">
-      Interest
+      Notification History
       </div>
       <DataGrid
         className="datagrid"
         rows={data}
-        columns={InterestColumns.concat(actionColumn)}
+        columns={InterestNotification.concat(actionColumn)}
         pageSize={10}
         rowsPerPageOptions={[10]}
         checkboxSelection
@@ -95,4 +96,4 @@ fetch("http://3.75.129.124:3000/admin-interest/delete", requestOptions)
   );
 };
 
-export default InsertDataTable;
+export default ShowNotificationTable;

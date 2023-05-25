@@ -1,9 +1,10 @@
 import "./widget.scss";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
+import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
+import HourglassTopIcon from '@mui/icons-material/HourglassTop';
+import ChildFriendlyIcon from '@mui/icons-material/ChildFriendly';
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -11,7 +12,7 @@ const Widget = ({ type }) => {
   const [data, setData] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
-      const url = "https://cdn.tauschtakel.de:3000/admin-admin/meta";
+      const url = "http://3.75.129.124:3000/admin-admin/meta";
       const response = await fetch(url);
       const data = await response.json();
       setData(data);
@@ -41,7 +42,7 @@ const Widget = ({ type }) => {
       isMoney: false,
       link: "View all Deals",
       icon: (
-        <ShoppingCartOutlinedIcon
+        <PublishedWithChangesIcon
           className="icon"
           style={{
             backgroundColor: "rgba(218, 165, 32, 0.2)",
@@ -54,9 +55,9 @@ const Widget = ({ type }) => {
     earning: {
       title: "ARTICLES",
       isMoney: true,
-      link: "View net Articles",
+      link: "View all Articles",
       icon: (
-        <MonetizationOnOutlinedIcon
+        <ChildFriendlyIcon
           className="icon"
           style={{ backgroundColor: "rgba(0, 128, 0, 0.2)", color: "green" }}
         />
@@ -66,9 +67,9 @@ const Widget = ({ type }) => {
     balance: {
       title: "PENDING ARTICLES",
       isMoney: true,
-      link: "See all Pending articles for Approval",
+      link: "Pending articles for Approval",
       icon: (
-        <AccountBalanceWalletOutlinedIcon
+        <HourglassTopIcon
           className="icon"
           style={{
             backgroundColor: "rgba(128, 0, 128, 0.2)",

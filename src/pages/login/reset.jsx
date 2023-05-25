@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import "./login.css";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Link } from "@mui/material";
 
 var myHeaders = new Headers();
 
-function Login() {
+function Reset() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -29,12 +30,12 @@ function Login() {
       redirect: "follow",
     };
 
-    fetch("http://3.75.129.124:3000/admin-admin/makeLogin", requestOptions)
+    fetch("http://3.75.129.124:3000/admin-admin/updateLogin", requestOptions)
       .then((response) => response.text())
       .then((result) => {
         let data = JSON.parse(result);
         if (data.status === "success") {
-          navigate("/home");
+          navigate("/");
         } else {
           alert(data.message);
         }
@@ -45,7 +46,7 @@ function Login() {
   return (
     <div className="login-container">
       <div className="login-form">
-        <h2>Login</h2>
+        <h2>Reset Password</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="username">Username</label>
@@ -68,14 +69,11 @@ function Login() {
             />
           </div>
           {error && <div className="error-message">{error}</div>}
-          <button>Login</button>
+          <button>Reset</button>
         </form>
-        <div className="reset-link">
-          <Link to="/reset">Forgot password? Reset here.</Link>
-        </div>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default Reset;

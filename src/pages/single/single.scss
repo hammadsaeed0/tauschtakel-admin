@@ -62,6 +62,7 @@
           }
         }
       }
+      
 
       .right {
         flex: 2;
@@ -82,3 +83,22 @@
     }
   }
 }
+
+.textarea {
+  width: 200%;
+  height: 150px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  border-color: transparent;
+  resize: vertical;
+  background-color: #f5f5f5;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+

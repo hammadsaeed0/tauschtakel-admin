@@ -30,7 +30,7 @@ export const ArticleColumns = [
   {
     field: "AskingPrice",
     headerName: "Asking Price",
-    width: 100,
+    width: 150,
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
@@ -58,7 +58,7 @@ export const ArticleColumns = [
   {
     field: "Condition",
     headerName: "Condition",
-    width: 150,
+    width: 200,
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
