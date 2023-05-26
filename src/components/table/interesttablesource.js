@@ -1,5 +1,5 @@
 export const InterestColumns = [
-  { field: "", width: 70 },
+  // { field: "id", width: 70 },
   {
     field: "InterestNames",
     headerName: "Interest Name",
