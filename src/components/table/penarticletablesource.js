@@ -28,8 +28,8 @@ export const Penarticletablesource = [
     },
   },
   {
-    field: "AskingPrice",
-    headerName: "Asking Price",
+    field: "Price",
+    headerName: "Price",
     width: 100,
     renderCell: (params) => {
       return (

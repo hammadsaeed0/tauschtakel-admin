@@ -1,0 +1,32 @@
+.main{
+  width: 60%;
+  height: 200px;
+  background-color: aquamarine;
+  display: flex;
+}
+.row{
+  width: 200px;
+  height: 100%;
+  background-color: black;
+  
+}
+.row1{
+  width: 100%;
+  height: 30%;
+  display: flex;
+}
+.avatar-preview{
+  width: 100%;
+  height: 100px;
+  background-color: aqua;
+}
+.name{
+  width: 80%;
+  background-color: green;
+  height: 100px;
+}
+.edit{
+  width: 20%;
+  background-color: yellow;
+  height: 100px;
+}

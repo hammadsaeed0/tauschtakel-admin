@@ -36,7 +36,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("http://3.75.129.124:3000/admin-user/delete", requestOptions)
+fetch("https://cdn.tauschtakel.de/admin-user/delete", requestOptions)
   .then(response => response.text())
   .then(result => fetchData())
   .catch(error => console.log('error', error));
@@ -55,7 +55,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("http://3.75.129.124:3000/admin-user/approveUser", requestOptions)
+fetch("https://cdn.tauschtakel.de/admin-user/approveUser", requestOptions)
   .then(response => response.text())
   .then(result => fetchData())
   .catch(error => console.log('error', error));
@@ -66,7 +66,7 @@ fetch("http://3.75.129.124:3000/admin-user/approveUser", requestOptions)
 
 
   const fetchData = async () => {
-    const url = "http://3.75.129.124:3000/admin-user/getAll";
+    const url = "https://cdn.tauschtakel.de/admin-user/getAll";
     const response = await fetch(url);
     const data = await response.json();
     setData(data.data);
@@ -89,13 +89,6 @@ fetch("http://3.75.129.124:3000/admin-user/approveUser", requestOptions)
             </Link>
             <div
               className="deleteButton"
-              // onClick={() => handleNotification(params.row._id)}
-              onClick={() => handleOpenPopup(params.row._id)}
-            >
-              Notification
-            </div>
-            <div
-              className="deleteButton"
               onClick={() => handleDelete(params.row._id)}
             >
               Delete
@@ -115,6 +108,49 @@ fetch("http://3.75.129.124:3000/admin-user/approveUser", requestOptions)
     },
   ];
 
+
+ const userColumns = [
+    // { field: "id", headerName: "ID", width: 70 },
+    {
+      field: "user",
+      headerName: "User",
+      width: 300,
+      renderCell: (params) => {
+        const handleImageClick = () => {
+          handleOpenPopup(params.row.image)
+        }
+        return (
+          <div className="cellWithImg">
+         
+         <img
+            className="cellImg"
+            src={params.row.image}
+            alt="avatar"
+            onClick={handleImageClick}
+          />
+     
+            <Link to={params.row._id}  style={{textDecoration: 'none', color:'gray'}}>
+            {params.row.username}
+            </Link>
+          </div>
+        );
+      },
+    },
+    {
+      field: "email",
+      headerName: "Email",
+      width: 300,
+      renderCell: (params) => {
+        return (
+          <div className={`cellWithStatus ${params.row.status}`}>
+            {params.row.email}
+          </div>
+        );
+      },
+    },
+  ];
+  
+
   return (
     <div className="datatable">
       <div className="datatableTitle">
@@ -125,20 +161,23 @@ fetch("http://3.75.129.124:3000/admin-user/approveUser", requestOptions)
       <button onClick={handleOpenPopup}>Open Popup</button> */}
 
       <Popup open={isPopupOpen} onClose={handleClosePopup} modal>
-        <div style={{ background: "white", padding: "20px", borderRadius: "4px" }}>
-          <h2>Popup Example</h2>
-          <div>
-            <h3>ID: {id}</h3>
-            <p>Popup content goes here.</p>
-            <button onClick={handleClosePopup}>Close Popup</button>
-          </div>
+        <div style={{ backgroundColor:'transparent', padding: "20px", borderRadius: "4px" }}>
+         
+     
+            <img
+            style={{width:'100%'}}
+            src={id}
+            alt="avatar"
+          />
+            <button style={{width:'150px'}} onClick={handleClosePopup}>Close</button>
+      
         </div>
       </Popup>
     </div>
       <DataGrid
         className="datagrid"
         rows={data}
-        columns={userColumns.concat(actionColumn)}
+        columns={userColumns.concat(actionColumn) }
         pageSize={11}
         rowsPerPageOptions={[11]}
         checkboxSelection
@@ -149,3 +188,4 @@ fetch("http://3.75.129.124:3000/admin-user/approveUser", requestOptions)
 };
 
 export default Datatable;
+

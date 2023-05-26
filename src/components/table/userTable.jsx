@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 const UList = () => {
   const [data, setData] = useState([]);
   useEffect(async () => {
-    const url = "http://3.75.129.124:3000/admin-deal/AllDeals";
+    const url = "https://cdn.tauschtakel.de/admin-deal/AllDeals";
     const response = await fetch(url);
     const jsonData = await response.json();
     setData(jsonData.deals);

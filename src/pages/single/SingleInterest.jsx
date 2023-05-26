@@ -13,7 +13,7 @@ import InsertDataTable from "../../components/datatable/InsertTable";
 const SingleInterest = () => {
   const {productId} = useParams();
   useEffect( async () => {
-    const url = `http://3.75.129.124:3000/admin-interest/${productId}`;
+    const url = `https://cdn.tauschtakel.de/admin-interest/${productId}`;
 
 const response = await fetch(url);
 

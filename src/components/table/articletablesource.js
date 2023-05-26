@@ -28,8 +28,8 @@ export const ArticleColumns = [
     },
   },
   {
-    field: "AskingPrice",
-    headerName: "Asking Price",
+    field: "Price",
+    headerName: "Price",
     width: 150,
     renderCell: (params) => {
       return (

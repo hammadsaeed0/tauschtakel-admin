@@ -28,7 +28,7 @@ const ShowNotificationTable = () => {
 //   redirect: 'follow'
 // };
 
-// fetch("http://3.75.129.124:3000/admin-interest/delete", requestOptions)
+// fetch("https://cdn.tauschtakel.de/admin-interest/delete", requestOptions)
 //   .then(response => response.text())
 //   .then(result => fetchData())
 //   .catch(error => console.log('error', error));
@@ -43,7 +43,7 @@ console.log(data);
 
 
   const fetchData = async () => {
-    const url = "http://3.75.129.124:3000/admin-notification/getAll";
+    const url = "https://cdn.tauschtakel.de/admin-notification/getAll";
     const response = await fetch(url);
     const data = await response.json();
     setData(data.data);

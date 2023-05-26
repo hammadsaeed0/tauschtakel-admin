@@ -26,7 +26,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("http://3.75.129.124:3000/admin-notification/sendNotification", requestOptions)
+fetch("https://cdn.tauschtakel.de/admin-notification/sendNotification", requestOptions)
   .then(response => response.text())
   .then(result => console.log("--------->",result))
   .catch(error => console.log('error', error));

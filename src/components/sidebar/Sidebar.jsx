@@ -72,10 +72,12 @@ const Sidebar = () => {
             <span>Commercial Adds</span>
           </li>
           <p className="title">USER</p>
+          <Link to="/admin" style={{ textDecoration: "none" }}>
           <li>
             <AccountCircleOutlinedIcon className="icon" />
             <span>Admin Setting</span>
           </li>
+          </Link>
           <Link to="/" style={{ textDecoration: "none" }}>
             <li>
               <LogoutIcon className="icon" />

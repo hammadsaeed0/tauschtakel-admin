@@ -11,7 +11,7 @@ const Datatable = () => {
 
 
   const handleApprove = async(id) => {
-    const url = 'http://3.75.129.124:3000/admin-article/approvedArticles';
+    const url = 'https://cdn.tauschtakel.de/admin-article/approvedArticles';
 
 const response = await fetch(url);
 
@@ -21,7 +21,7 @@ setData(data.articles)
 setTile("Approve Article")
   };
   const handlePending = async(id) => {
-    const url = 'http://3.75.129.124:3000/admin-article/pendingArticles';
+    const url = 'https://cdn.tauschtakel.de/admin-article/pendingArticles';
 
 const response = await fetch(url);
 
@@ -34,7 +34,7 @@ setTile("Pending Article")
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = "http://3.75.129.124:3000/admin-article/approvedArticles";
+      const url = "https://cdn.tauschtakel.de/admin-article/approvedArticles";
       const response = await fetch(url);
       const data = await response.json();
       setData(data.articles);

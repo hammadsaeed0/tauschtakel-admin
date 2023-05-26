@@ -30,7 +30,7 @@ function Reset() {
       redirect: "follow",
     };
 
-    fetch("http://3.75.129.124:3000/admin-admin/updateLogin", requestOptions)
+    fetch("https://cdn.tauschtakel.de/admin-admin/updateLogin", requestOptions)
       .then((response) => response.text())
       .then((result) => {
         let data = JSON.parse(result);
