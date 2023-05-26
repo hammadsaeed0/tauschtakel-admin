@@ -169,7 +169,7 @@ fetch("https://cdn.tauschtakel.de/admin-user/approveUser", requestOptions)
             src={id}
             alt="avatar"
           />
-            <button onClick={handleClosePopup}>Close Popup</button>
+            <button onClick={handleClosePopup}>Close</button>
       
         </div>
       </Popup>
