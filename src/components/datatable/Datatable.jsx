@@ -36,7 +36,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("http://3.75.129.124:3000/admin-user/delete", requestOptions)
+fetch("https://cdn.tauschtakel.de/admin-user/delete", requestOptions)
   .then(response => response.text())
   .then(result => fetchData())
   .catch(error => console.log('error', error));
@@ -55,7 +55,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("http://3.75.129.124:3000/admin-user/approveUser", requestOptions)
+fetch("https://cdn.tauschtakel.de/admin-user/approveUser", requestOptions)
   .then(response => response.text())
   .then(result => fetchData())
   .catch(error => console.log('error', error));
@@ -66,7 +66,7 @@ fetch("http://3.75.129.124:3000/admin-user/approveUser", requestOptions)
 
 
   const fetchData = async () => {
-    const url = "http://3.75.129.124:3000/admin-user/getAll";
+    const url = "https://cdn.tauschtakel.de/admin-user/getAll";
     const response = await fetch(url);
     const data = await response.json();
     setData(data.data);
