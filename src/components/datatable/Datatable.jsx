@@ -161,7 +161,7 @@ fetch("https://cdn.tauschtakel.de/admin-user/approveUser", requestOptions)
       <button onClick={handleOpenPopup}>Open Popup</button> */}
 
       <Popup open={isPopupOpen} onClose={handleClosePopup} modal>
-        <div style={{ backgroundColor:'transparent', padding: "20px", borderRadius: "4px" , backgroundColor:'red'  }}>
+        <div style={{ backgroundColor:'transparent', padding: "20px", borderRadius: "4px"  }}>
          
      
             <img
