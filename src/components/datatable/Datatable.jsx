@@ -165,7 +165,7 @@ fetch("https://cdn.tauschtakel.de/admin-user/approveUser", requestOptions)
          
      
             <img
-            style={{width:'100%',height:"50%", objectFit:'cover', boxSizing:'border-box' ,right:"20%"}}
+            style={{width:'100%',height: "700px"}}
             src={id}
             alt="avatar"
           />
