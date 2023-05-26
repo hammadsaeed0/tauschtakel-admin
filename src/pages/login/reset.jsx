@@ -16,31 +16,33 @@ function Reset() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+  
+    var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-
+    
     var urlencoded = new URLSearchParams();
-    urlencoded.append("userName", username);
-    urlencoded.append("password", password);
-    urlencoded.append("id", "642e99b2bd4b99e559412dac");
-
+    urlencoded.append("password", username);
+    urlencoded.append("newPassword", password);
+    
     var requestOptions = {
-      method: "POST",
+      method: 'POST',
       headers: myHeaders,
       body: urlencoded,
-      redirect: "follow",
+      redirect: 'follow'
     };
-
-    fetch("https://cdn.tauschtakel.de/admin-admin/updateLogin", requestOptions)
-      .then((response) => response.text())
-      .then((result) => {
-        let data = JSON.parse(result);
-        if (data.status === "success") {
-          navigate("/");
-        } else {
-          alert(data.message);
+    
+    fetch("https://cdn.tauschtakel.de/admin-admin/updatePassword", requestOptions)
+      .then(response => response.text())
+      .then(result => {
+        let data = JSON.parse(result)
+        if(data.status=== "success"){
+          navigate('/')
+        }
+        if(data.status === "fail"){
+          alert(data.message)
         }
       })
-      .catch((error) => console.log("error", error));
+      .catch(error => console.log('error', error));
   };
 
   return (
@@ -49,7 +51,7 @@ function Reset() {
         <h2>Reset Password</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">Old Password</label>
             <input
               type="text"
               id="username"
@@ -59,7 +61,7 @@ function Reset() {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">New Password</label>
             <input
               type="password"
               id="password"
