@@ -27,10 +27,10 @@ var requestOptions = {
 };
 
 fetch("https://cdn.tauschtakel.de/admin-notification/sendNotification", requestOptions)
-  .then(response => response.text())
+ .then(response => response.text())
   .then(result => console.log("--------->",result))
   .catch(error => console.log('error', error));
-  };
+  }; 
 
   return (
     <div className="single">

@@ -16,6 +16,7 @@ import Interest from "./pages/list/Interest";
 import Notification from "./components/table/notification";
 import Reset from "./pages/login/reset";
 import AdminProfile from "./pages/admin/admin";
+import SingleNotification from "./components/table/Singlenotification";
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
             <Route path="article" element={<AllArticleTable />} />
             <Route path="admin" element={<AdminProfile />} />
             <Route path="notification" element={<Notification />} />
+            <Route path="Singlenotification" element={<SingleNotification />} />
             <Route path="pendingArticle" element={<AllPendTable />} />
             <Route path="users">
               <Route index element={<List />} />
