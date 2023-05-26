@@ -26,14 +26,18 @@ const Single = () => {
     setName(data.user.username);
   }, []);
   const buttonStyle = {
-    border: '2px solid red',
-    color: 'black',
-    backgroundColor: 'transparent',
-    padding: '10px 20px',
-    borderRadius: '5px',
-    fontSize: '10px',
-    width: '100px', // Custom width
-    height: '30px', // Custom height
+    border: "2px solid red",
+    color: "black",
+    backgroundColor: "transparent",
+    padding: "10px 20px",
+    borderRadius: "5px",
+    fontSize: "10px",
+    width: "100px", // Custom width
+    height: "30px", // Custom height
+  };
+  const buttonGroupStyle = {
+    display: "flex",
+    justifyContent: "center",
   };
 
   return (
@@ -57,7 +61,7 @@ const Single = () => {
                       style={{ width: "20px" }}
                       src="https://cdn1.iconfinder.com/data/icons/social-messaging-ui-color/254000/52-512.png"
                       alt="avatar"
-                    // onClick={handleImageClick}
+                      // onClick={handleImageClick}
                     />
                   </span>
                 </div>
@@ -69,7 +73,7 @@ const Single = () => {
                       style={{ width: "20px" }}
                       src="https://cdn1.iconfinder.com/data/icons/social-messaging-ui-color/254000/52-512.png"
                       alt="avatar"
-                    // onClick={handleImageClick}
+                      // onClick={handleImageClick}
                     />
                   </span>
                 </div>
@@ -81,7 +85,7 @@ const Single = () => {
                       style={{ width: "20px" }}
                       src="https://cdn1.iconfinder.com/data/icons/social-messaging-ui-color/254000/52-512.png"
                       alt="avatar"
-                    // onClick={handleImageClick}
+                      // onClick={handleImageClick}
                     />
                   </span>
                 </div>
@@ -93,7 +97,7 @@ const Single = () => {
                       style={{ width: "20px" }}
                       src="https://cdn1.iconfinder.com/data/icons/social-messaging-ui-color/254000/52-512.png"
                       alt="avatar"
-                    // onClick={handleImageClick}
+                      // onClick={handleImageClick}
                     />
                   </span>
                 </div>
@@ -105,14 +109,51 @@ const Single = () => {
                       style={{ width: "20px" }}
                       src="https://cdn1.iconfinder.com/data/icons/social-messaging-ui-color/254000/52-512.png"
                       alt="avatar"
-                    // onClick={handleImageClick}
+                      // onClick={handleImageClick}
                     />
                   </span>
                 </div>
                 {/* Button Section  */}
-                <Button variant="outlined" color="error" size="small" style={buttonStyle}>
-                  Error
-                </Button>
+                <div style={buttonGroupStyle}>
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    size="small"
+                    style={buttonStyle}
+                  >
+                    Button 1
+                  </Button>
+                  <div style={{ width: "10px" }}></div>{" "}
+                  {/* Add space between buttons */}
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    size="small"
+                    style={buttonStyle}
+                  >
+                    Button 2
+                  </Button>
+                  <div style={{ width: "10px" }}></div>{" "}
+                  {/* Add space between buttons */}
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    size="small"
+                    style={buttonStyle}
+                  >
+                    Button 3
+                  </Button>
+                  <div style={{ width: "10px" }}></div>{" "}
+                  {/* Add space between buttons */}
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    size="small"
+                    style={buttonStyle}
+                  >
+                    Button 4
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
