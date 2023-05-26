@@ -36,7 +36,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://cdn.tauschtakel.de/admin-user/delete", requestOptions)
+fetch("http://3.75.129.124:3000/admin-user/delete", requestOptions)
   .then(response => response.text())
   .then(result => fetchData())
   .catch(error => console.log('error', error));
@@ -55,7 +55,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://cdn.tauschtakel.de/admin-user/approveUser", requestOptions)
+fetch("http://3.75.129.124:3000/admin-user/approveUser", requestOptions)
   .then(response => response.text())
   .then(result => fetchData())
   .catch(error => console.log('error', error));
@@ -66,7 +66,7 @@ fetch("https://cdn.tauschtakel.de/admin-user/approveUser", requestOptions)
 
 
   const fetchData = async () => {
-    const url = "https://cdn.tauschtakel.de/admin-user/getAll";
+    const url = "http://3.75.129.124:3000/admin-user/getAll";
     const response = await fetch(url);
     const data = await response.json();
     setData(data.data);
@@ -161,15 +161,15 @@ fetch("https://cdn.tauschtakel.de/admin-user/approveUser", requestOptions)
       <button onClick={handleOpenPopup}>Open Popup</button> */}
 
       <Popup open={isPopupOpen} onClose={handleClosePopup} modal>
-        <div style={{ backgroundColor:'transparent', padding: "20px", borderRadius: "4px"  }}>
+        <div style={{ background: "transparent", padding: "20px", borderRadius: "4px" }}>
          
      
             <img
-            style={{width:'90%'}}
+            style={{width:'100%'}}
             src={id}
             alt="avatar"
           />
-            <button style={{width:'150px'}} onClick={handleClosePopup}>Close</button>
+            <button onClick={handleClosePopup}>Close Popup</button>
       
         </div>
       </Popup>
