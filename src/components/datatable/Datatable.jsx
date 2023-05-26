@@ -11,13 +11,7 @@ const Datatable = () => {
   const [id, setId] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  const popupContentStyle = {
-    backgroundColor: 'transparent',
-    padding: '20px',
-    borderRadius: '4px',
-    width: '200px', // Adjust the width of the popup
-    maxWidth: '50%', // Set the maximum width of the popup
-  };
+
   const handleOpenPopup = (id) => {
     setIsPopupOpen(true);
     setId(id)
@@ -167,7 +161,7 @@ fetch("https://cdn.tauschtakel.de/admin-user/approveUser", requestOptions)
       <button onClick={handleOpenPopup}>Open Popup</button> */}
 
       <Popup open={isPopupOpen} onClose={handleClosePopup} modal>
-        <div style={popupContentStyle}>
+        <div style={{ backgroundColor:'transparent', padding: "20px", borderRadius: "4px" , backgroundColor:'red'  }}>
          
      
             <img
