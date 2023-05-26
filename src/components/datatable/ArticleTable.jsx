@@ -180,7 +180,7 @@ setTile("Pending Article")
          
      
             <img
-            style={{width:'100%', height: "600px", objectFit:'cover'}}
+            style={{width:'100%', height: "750px", objectFit:'cover'}}
             src={id[0]}
             alt="avatar"
           />
