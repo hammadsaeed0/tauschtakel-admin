@@ -72,7 +72,7 @@ function Login() {
           <button>Login</button>
         </form>
         <div className="reset-link">
-          <Link to="/reset">Forgot password? Reset here.</Link>
+          <Link to="/reset">Forgot password</Link>
         </div>
       </div>
     </div>
