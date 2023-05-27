@@ -74,7 +74,7 @@ var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
 var urlencoded = new URLSearchParams();
-urlencoded.append("username", textInput1);
+urlencoded.append("userName", textInput1);
 urlencoded.append("password", textInput2);
 
 var requestOptions = {
@@ -183,7 +183,7 @@ useEffect(async() => {
                     />
                   </span></h1>
                 <div className="detailItem">
-                  <span className="itemKey">Email:</span>
+                  <span className="itemKey">Password:</span>
                   <span className="itemValue">{email} <span className="itemValue" onClick={handleOpenPopup}>
                     <img
                       style={{ width: "20px" }}
