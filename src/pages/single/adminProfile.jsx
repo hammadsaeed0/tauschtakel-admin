@@ -167,7 +167,7 @@ useEffect(async() => {
               <img src={image} alt="" className="itemImg" />
               <span className="itemValue" onClick={handleOpenPopup}>
                     <img
-                      style={{ width: "20px", marginTop:'80px' , marginLeft:'-40px', background:'white', borderRadius:'10px',  boxShadow: '1px 2px 10px #808080',}}
+                      style={{ width: "25px", marginTop:'80px' , marginLeft:'-40px', background:'white', borderRadius:'30px',  boxShadow: '1px 1px 5px #808080',}}
                       src="https://cdn1.iconfinder.com/data/icons/social-messaging-ui-color/254000/52-512.png"
                       alt="avatar"
                       // onClick={handleImageClick}
@@ -185,6 +185,17 @@ useEffect(async() => {
                 <div className="detailItem">
                   <span className="itemKey">Password:</span>
                   <span className="itemValue">{email} <span className="itemValue" onClick={handleOpenPopup}>
+                    <img
+                      style={{ width: "20px" }}
+                      src="https://cdn1.iconfinder.com/data/icons/social-messaging-ui-color/254000/52-512.png"
+                      alt="avatar"
+                      // onClick={handleImageClick}
+                    />
+                  </span></span>
+                </div>
+                <div className="detailItem">
+                  <span className="itemKey">Email:</span>
+                  <span className="itemValue">support@tauschtakel.de <span className="itemValue" onClick={handleOpenPopup}>
                     <img
                       style={{ width: "20px" }}
                       src="https://cdn1.iconfinder.com/data/icons/social-messaging-ui-color/254000/52-512.png"
