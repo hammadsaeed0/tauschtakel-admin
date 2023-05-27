@@ -9,12 +9,14 @@ import { useEffect, useState } from "react";
 import InsertDataTable from "../../components/datatable/InsertTable";
 import { Button } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
+import ArticleTabe from "../../components/datatable/ArticleTable"
 
 const Single = () => {
   const navigate = useNavigate();
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [image, setImage] = useState();
+  const [id, setId] = useState();
   const { userId } = useParams();
   useEffect(async () => {
     const url = `https://cdn.tauschtakel.de/admin-user/${userId}`;
@@ -23,6 +25,7 @@ const Single = () => {
 
     const text = await response.text();
     let data = JSON.parse(text);
+    setId(data.user._id)
     setEmail(data.user.email);
     setImage(data.user.image);
     setName(data.user.username);
@@ -79,7 +82,8 @@ const Single = () => {
     justifyContent: "center",
   };
   const sendNotification = () =>{
-    navigate('/Singlenotification')
+    navigate(`/notification?id=${id}`)
+    // console.log(id);
   }
   return (
     <div className="single">
@@ -186,8 +190,8 @@ const Single = () => {
           </div>
         </div>
         <div className="bottom">
-          <h1 className="title">Interest</h1>
-          <InsertDataTable />
+          <h1 className="title">Article</h1>
+         <ArticleTabe />
         </div>
       </div>
     </div>

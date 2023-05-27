@@ -18,10 +18,23 @@ export const InterestNotification = [
     headerName: "Text",
     width: 400,
     renderCell: (params) => {
+      console.log("--------->",params.row);
       return (
         <div className="cellWithImg">
           {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}
           {params.row.body}
+        </div>
+      );
+    },
+  },
+  {
+    field: "User",
+    headerName: "User",
+    width: 250,
+    renderCell: (params) => {
+      return (
+        <div className={`cellWithStatus ${params.row.status}`}>
+          {params.row.name}
         </div>
       );
     },

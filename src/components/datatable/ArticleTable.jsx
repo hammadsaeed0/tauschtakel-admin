@@ -44,7 +44,7 @@ setTile("Pending Article")
   };
   useEffect(() => {
     const fetchData = async () => {
-      const url = "https://cdn.tauschtakel.de/admin-article/approvedArticles";
+      const url = "https://cdn.tauschtakel.de/admin-article/allArticles";
       const response = await fetch(url);
       const data = await response.json();
       setData(data.articles);
@@ -56,8 +56,9 @@ setTile("Pending Article")
     {
       field: "action",
       headerName: "Action",
-      width: 200,
+      width: 300,
       renderCell: (params) => {
+        console.log(params.row);
         return (
           <div className="cellAction">
             <Link to={`/users/${params.row._id}`} style={{ textDecoration: "none" }}>
@@ -69,6 +70,19 @@ setTile("Pending Article")
             >
               Delete
             </div>
+            {
+              params.row.status === "pending" ? <div
+              className="AButton"
+              // onClick={() => handleDelete(params.row._id)}
+            >
+              Approve
+            </div> : params.row.status === "approved" ? <div
+              className="UButton"
+              // onClick={() => handleDelete(params.row._id)}
+            >
+              Unapprove
+            </div> : null
+            }
           </div>
         );
       },
@@ -100,15 +114,15 @@ setTile("Pending Article")
     },
   },
   {
-    field: "username",
-    headerName: "Username",
-    width: 150,
+    field: "created",
+    headerName: "Created At",
+    width: 250,
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
           {" "}
           {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
-          {params.row.username}{" "}
+          {params.row.createdAt}
         </div>
       );
     },
@@ -142,6 +156,20 @@ setTile("Pending Article")
     },
   },
   {
+    field: "Zip",
+    headerName: "Zip Code",
+    width: 150,
+    renderCell: (params) => {
+      return (
+        <div className="cellWithImg">
+          {" "}
+          {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
+          {/* {params.row}{" "} */}
+        </div>
+      );
+    },
+  },
+  {
     field: "Condition",
     headerName: "Condition",
     width: 200,
@@ -162,14 +190,14 @@ setTile("Pending Article")
     <div className="datatable">
       <div className="datatableTitle">
         {title}
-        <div className="setBtn">
+        {/* <div className="setBtn">
         <div className="link" onClick={() => handleApprove()}>
           Approved
         </div>
         <div className="link2" onClick={() => handlePending()}>
           Pending
         </div>
-        </div>
+        </div> */}
       </div>
       <div style={{ pointerEvents: isPopupOpen ? "none" : "auto" }}>
       {/* <h1>My Component</h1>

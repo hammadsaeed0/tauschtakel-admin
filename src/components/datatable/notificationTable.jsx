@@ -1,37 +1,94 @@
 import "../../pages/single/single.scss";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ShowNotificationTable from "./showNotificationTable";
-
-
 
 const NotificationTable = () => {
   const { userId } = useParams();
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const id = searchParams.get("id");
+
+  if (id === null) {
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+      var urlencoded = new URLSearchParams();
+      urlencoded.append("title", title);
+      urlencoded.append("body", message);
+
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: urlencoded,
+        redirect: "follow",
+      };
+
+      fetch(
+        "https://cdn.tauschtakel.de/admin-notification/sendNotification",
+        requestOptions
+      )
+        .then((response) => response.text())
+        .then((result) => console.log("--------->", result))
+        .catch((error) => console.log("error", error));
+    };
+  } else {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+    var urlencoded = new URLSearchParams();
+    urlencoded.append("title", title);
+    urlencoded.append("body", message);
+    urlencoded.append("uid", id);
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: urlencoded,
+      redirect: "follow",
+    };
+
+    fetch(
+      "https://cdn.tauschtakel.de/admin-notification/sendNotification",
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
-var urlencoded = new URLSearchParams();
-urlencoded.append("title", title);
-urlencoded.append("body", message);
+    var urlencoded = new URLSearchParams();
+    urlencoded.append("title", title);
+    urlencoded.append("body", message);
 
-var requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  body: urlencoded,
-  redirect: 'follow'
-};
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: urlencoded,
+      redirect: "follow",
+    };
 
-fetch("https://cdn.tauschtakel.de/admin-notification/sendNotification", requestOptions)
- .then(response => response.text())
-  .then(result => console.log("--------->",result))
-  .catch(error => console.log('error', error));
-  }; 
-
+    fetch(
+      "https://cdn.tauschtakel.de/admin-notification/sendNotification",
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => console.log("--------->", result))
+      .catch((error) => console.log("error", error));
+  };
+  const handleClear = () => {
+    setMessage('')
+    setTitle('')
+  };
   return (
     <div className="single">
       <div className="singleContainer">
@@ -50,15 +107,46 @@ fetch("https://cdn.tauschtakel.de/admin-notification/sendNotification", requestO
                   />
                 </div>
                 <div>
-                  <label htmlFor="message">Message:</label>
+                  <label htmlFor="message">Text</label>
                   <textarea
-                  className="textarea"
+                    className="textarea"
                     id="message"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                   ></textarea>
                 </div>
-                <button type="submit">Notification</button>
+                <div style={{ display: "flex" , justifySelf:'center' }}>
+                  <button
+                    style={{
+                      padding: "10px 20px",
+                      marginRight:'10px',
+                      background: "transparent",
+                      color: "crimson",
+                      border: "none",
+                      borderRadius: "4px",
+                      cursor: "pointer",
+                      border:'2px solid crimson'
+                    }}
+                    onClick={handleClear}
+                  >
+                    Clear
+                  </button>
+                  <button
+                    type="submit"
+                    style={{
+                      padding: "10px 20px",
+                      marginRight:'10px',
+                      background: "transparent",
+                      color: "#20AC73",
+                      border: "none",
+                      borderRadius: "4px",
+                      cursor: "pointer",
+                      border:'2px solid #20AC73'
+                    }}
+                  >
+                    Send
+                  </button>
+                </div>
               </form>
             </div>
           </div>

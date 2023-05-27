@@ -3,7 +3,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import { useState } from "react";
 
-const AdminProfile = () => {
+const AdminProfile1 = () => {
   const [avatar, setAvatar] = useState('');  
   return (
     <div className="single">
@@ -29,4 +29,4 @@ const AdminProfile = () => {
   );
 };
 
-export default AdminProfile;
+export default AdminProfile1;

@@ -81,7 +81,7 @@ console.log(data);
   return (
     <div className="datatable">
       <div className="datatableTitle">
-      Notification History
+       History of Notification
       </div>
       <DataGrid
         className="datagrid"

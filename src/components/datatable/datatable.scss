@@ -115,11 +115,18 @@
       border: 1px dotted rgba(220, 20, 60, 0.6);
       cursor: pointer;
     }
-    .ApproveButton {
+    .AButton {
       padding: 2px 5px;
       border-radius: 5px;
       color: green;
       border: 1px dotted rgba(0, 179, 24, 0.6);
+      cursor: pointer;
+    }
+    .UButton {
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: #FFA500      ;
+      border: 1px dotted #FFA500;
       cursor: pointer;
     }
   }
