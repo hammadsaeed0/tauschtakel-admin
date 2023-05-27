@@ -113,6 +113,20 @@ setTile("Pending Article")
       );
     },
   },
+  // {
+  //   field: "Username",
+  //   headerName: "Username",
+  //   width: 250,
+  //   renderCell: (params) => {
+  //     return (
+  //       <div className="cellWithImg">
+  //         {" "}
+  //         {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
+  //         {params.row.username}
+  //       </div>
+  //     );
+  //   },
+  // },
   {
     field: "created",
     headerName: "Created At",
@@ -151,20 +165,6 @@ setTile("Pending Article")
           {" "}
           {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
           {params.row.category}{" "}
-        </div>
-      );
-    },
-  },
-  {
-    field: "Zip",
-    headerName: "Zip Code",
-    width: 150,
-    renderCell: (params) => {
-      return (
-        <div className="cellWithImg">
-          {" "}
-          {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
-          {/* {params.row}{" "} */}
         </div>
       );
     },
@@ -221,8 +221,8 @@ setTile("Pending Article")
         className="datagrid"
         rows={data}
         columns={ArticleColumns.concat(actionColumn)}
-        pageSize={9}
-        rowsPerPageOptions={[9]}
+        pageSize={50}
+        rowsPerPageOptions={[50]}
         checkboxSelection
         getRowId={(row) => row._id}
       />

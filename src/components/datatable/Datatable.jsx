@@ -148,6 +148,19 @@ fetch("https://cdn.tauschtakel.de/admin-user/approveUser", requestOptions)
         );
       },
     },
+    {
+      field: "Created At",
+      headerName: "Created At",
+      width: 300,
+      renderCell: (params) => {
+        return (
+          <div className={`cellWithStatus ${params.row.status}`}>
+            {params.row.createdAt}
+          </div>
+        );
+      },
+
+    }
   ];
   
 
@@ -178,8 +191,8 @@ fetch("https://cdn.tauschtakel.de/admin-user/approveUser", requestOptions)
         className="datagrid"
         rows={data}
         columns={userColumns.concat(actionColumn) }
-        pageSize={11}
-        rowsPerPageOptions={[11]}
+        pageSize={50}
+        rowsPerPageOptions={[50]}
         checkboxSelection
         getRowId={(row) => row._id}
       />

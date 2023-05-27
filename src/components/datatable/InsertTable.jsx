@@ -86,8 +86,8 @@ fetch("https://cdn.tauschtakel.de/admin-interest/delete", requestOptions)
         className="datagrid"
         rows={data}
         columns={InterestColumns.concat(actionColumn)}
-        pageSize={10}
-        rowsPerPageOptions={[10]}
+        pageSize={50}
+        rowsPerPageOptions={[50]}
         checkboxSelection
         getRowId={(row) => row._id}
       />

@@ -56,8 +56,8 @@ const DealDataTable = () => {
         className="datagrid"
         rows={data}
         columns={dealColumns}
-        pageSize={9}
-        rowsPerPageOptions={[9]}
+        pageSize={50}
+        rowsPerPageOptions={[50]}
         checkboxSelection
         getRowId={(row) => row._id}
       />
