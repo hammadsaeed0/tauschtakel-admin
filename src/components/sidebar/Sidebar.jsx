@@ -66,7 +66,7 @@ const Sidebar = () => {
           <Link to="/article" style={{ textDecoration: "none" }}>
             <li>
               <AddCircleIcon className="icon" />
-              <span>New Articles</span>
+              <span>Add Article</span>
             </li>
           </Link>
           <li>

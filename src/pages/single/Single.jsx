@@ -20,7 +20,6 @@ const Single = () => {
   const { userId } = useParams();
   useEffect(async () => {
     const url = `https://cdn.tauschtakel.de/admin-user/${userId}`;
-
     const response = await fetch(url);
 
     const text = await response.text();
@@ -29,7 +28,7 @@ const Single = () => {
     setEmail(data.user.email);
     setImage(data.user.image);
     setName(data.user.username);
-  }, []);
+  }, [userId]);
   const buttonStyle = {
     border: "2px solid #DE3163",
     color: "#DE3163",

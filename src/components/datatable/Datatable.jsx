@@ -72,7 +72,6 @@ fetch("https://cdn.tauschtakel.de/admin-user/approveUser", requestOptions)
     setData(data.data);
   };
   useEffect(() => {
-    
     fetchData();
   }, []);
 
@@ -84,7 +83,7 @@ fetch("https://cdn.tauschtakel.de/admin-user/approveUser", requestOptions)
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to={`/users/${params.row._id}`} style={{ textDecoration: "none" }}>
+            <Link to={`/users/${params.row.uid}`} style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
             </Link>
             <div

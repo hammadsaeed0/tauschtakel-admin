@@ -108,34 +108,23 @@ setTile("Pending Article")
       );
     },
   },
-  // {
-  //   field: "Username",
-  //   headerName: "Username",
-  //   width: 250,
-  //   renderCell: (params) => {
-  //     return (
-  //       <div className="cellWithImg">
-  //         {" "}
-  //         {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
-  //         {params.row.username}
-  //       </div>
-  //     );
-  //   },
-  // },
   {
-    field: "created",
-    headerName: "Created At",
+    field: "Username",
+    headerName: "Username",
     width: 250,
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
           {" "}
-          {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
-          {params.row.createdAt}
+          {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}
+          <Link to={`/users/${params.row.uid}`}  style={{textDecoration: 'none', color:'gray'}}>
+          {params.row.username}
+          </Link>
         </div>
       );
     },
   },
+  
   {
     field: "Price",
     headerName: "Price",
@@ -144,7 +133,6 @@ setTile("Pending Article")
       return (
         <div className="cellWithImg">
           {" "}
-          {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
           {params.row.price}{" "}
         </div>
       );
@@ -174,6 +162,20 @@ setTile("Pending Article")
           {" "}
           {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
           {params.row.condition}{" "}
+        </div>
+      );
+    },
+  },
+  {
+    field: "created",
+    headerName: "Created At",
+    width: 250,
+    renderCell: (params) => {
+      return (
+        <div className="cellWithImg">
+          {" "}
+          {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
+          {params.row.createdAt}
         </div>
       );
     },
