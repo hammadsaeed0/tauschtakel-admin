@@ -2,6 +2,7 @@ import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
+import SignleArtle from './pages/single/SingleArticle'
 import SingleInterest from "./pages/single/SingleInterest";
 import New from "./pages/new/New";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -30,10 +31,11 @@ function App() {
             <Route path="home" element={<Home />} />
             <Route path="reset" element={<Reset />} />
             <Route path="deal" element={<AllDealTable />} />
-            <Route path="article" element={<AllArticleTable />} />
+            {/* <Route path="article" element={<AllArticleTable />} /> */}
             <Route path="admin" element={<AdminProfile />} />
             <Route path="notification" element={<Notification />} />
-            <Route path="pendingArticle" element={<AllPendTable />} />
+            {/* <Route path="pendingArticle" element={<AllPendTable />} /> */}
+
             <Route path="users">
               <Route index element={<List />} />
               <Route path=":userId" element={<Single />} />
@@ -42,6 +44,16 @@ function App() {
                 element={<New inputs={userInputs} title="Add New User" />}
               />
             </Route>
+
+            <Route path="article">
+              <Route index element={<AllArticleTable />} />
+              <Route path=":articleId" element={<SignleArtle />} />
+            </Route>
+            <Route path="pendingArticle">
+              <Route index element={<AllPendTable />} />
+              <Route path=":articleId" element={<SignleArtle />} />
+            </Route>
+
             <Route path="interest">
               <Route index element={<Interest />} />
               <Route path=":productId" element={<SingleInterest />} />
@@ -50,6 +62,7 @@ function App() {
                 element={<New inputs={productInputs} title="Add New Product" />}
               />
             </Route>
+
           </Route>
         </Routes>
       </BrowserRouter>

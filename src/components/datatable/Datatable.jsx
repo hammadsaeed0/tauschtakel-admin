@@ -193,7 +193,6 @@ fetch("https://cdn.tauschtakel.de/admin-user/approveUser", requestOptions)
         columns={userColumns.concat(actionColumn) }
         pageSize={50}
         rowsPerPageOptions={[50]}
-        checkboxSelection
         getRowId={(row) => row._id}
       />
     </div>

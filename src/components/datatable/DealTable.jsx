@@ -58,7 +58,6 @@ const DealDataTable = () => {
         columns={dealColumns}
         pageSize={50}
         rowsPerPageOptions={[50]}
-        checkboxSelection
         getRowId={(row) => row._id}
       />
     </div>

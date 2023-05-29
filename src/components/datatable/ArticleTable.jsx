@@ -19,14 +19,7 @@ const Datatable = () => {
   };
 
   const handleApprove = async(id) => {
-    const url = 'https://cdn.tauschtakel.de/admin-article/approvedArticles';
-
-const response = await fetch(url);
-
-const text = await response.text();
-let data = JSON.parse(text)
-setData(data.articles)
-setTile("Approve Article")
+    
   };
   const handlePending = async(id) => {
     const url = 'https://cdn.tauschtakel.de/admin-article/pendingArticles';
@@ -108,7 +101,9 @@ setTile("Pending Article")
             alt="avatar"
             onClick={handleImageClick}
           />
+          <Link to={params.row._id}  style={{textDecoration: 'none', color:'gray'}}>
           {params.row.title}{" "}
+          </Link>
         </div>
       );
     },
@@ -192,10 +187,10 @@ setTile("Pending Article")
         {title}
         {/* <div className="setBtn">
         <div className="link" onClick={() => handleApprove()}>
-          Approved
+          New Article
         </div>
-        <div className="link2" onClick={() => handlePending()}>
-          Pending
+        <div className="link" onClick={() => handlePending()}>
+          Pending Article
         </div>
         </div> */}
       </div>
@@ -223,7 +218,6 @@ setTile("Pending Article")
         columns={ArticleColumns.concat(actionColumn)}
         pageSize={50}
         rowsPerPageOptions={[50]}
-        checkboxSelection
         getRowId={(row) => row._id}
       />
     </div>

@@ -60,9 +60,9 @@ const PendingArticleTable = () => {
     <div className="datatable">
       <div className="datatableTitle">
         Pending Articles
-        <Link to="/users/new" className="link">
+        {/* <Link to="/users/new" className="link">
           Add New
-        </Link>
+        </Link> */}
       </div>
       <DataGrid
         className="datagrid"
@@ -70,7 +70,6 @@ const PendingArticleTable = () => {
         columns={Penarticletablesource.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}
-        checkboxSelection
         getRowId={(row) => row._id}
       />
     </div>

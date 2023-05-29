@@ -89,7 +89,6 @@ console.log(data);
         columns={InterestNotification.concat(actionColumn)}
         pageSize={10}
         rowsPerPageOptions={[10]}
-        checkboxSelection
         getRowId={(row) => row._id}
       />
     </div>

@@ -88,7 +88,6 @@ fetch("https://cdn.tauschtakel.de/admin-interest/delete", requestOptions)
         columns={InterestColumns.concat(actionColumn)}
         pageSize={50}
         rowsPerPageOptions={[50]}
-        checkboxSelection
         getRowId={(row) => row._id}
       />
     </div>

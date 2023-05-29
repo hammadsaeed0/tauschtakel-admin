@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export const Penarticletablesource = [
   {
     field: "title",
@@ -7,8 +9,10 @@ export const Penarticletablesource = [
       return (
         <div className="cellWithImg">
           {" "}
+          <Link to={params.row._id}  style={{textDecoration: 'none', color:'gray'}}>
           <img className="cellImg" src={params.row.image[0]} alt="avatar" />{" "}
           {params.row.title}{" "}
+          </Link>
         </div>
       );
     },
@@ -22,7 +26,9 @@ export const Penarticletablesource = [
         <div className="cellWithImg">
           {" "}
           {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
+          
           {params.row.username}{" "}
+          
         </div>
       );
     },
@@ -65,6 +71,20 @@ export const Penarticletablesource = [
           {" "}
           {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
           {params.row.condition}{" "}
+        </div>
+      );
+    },
+  },
+  {
+    field: "Created At",
+    headerName: "Created At",
+    width: 200,
+    renderCell: (params) => {
+      return (
+        <div className="cellWithImg">
+          {" "}
+          {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
+          {params.row.createdAt}{" "}
         </div>
       );
     },
