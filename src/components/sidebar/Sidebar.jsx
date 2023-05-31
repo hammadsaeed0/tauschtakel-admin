@@ -10,7 +10,7 @@ import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import ChildFriendlyIcon from '@mui/icons-material/ChildFriendly';
-import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
+import HourglassTopIcon from '@mui/icons-material/HourglassTop';
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
@@ -59,14 +59,8 @@ const Sidebar = () => {
           </Link>
           <Link to="/pendingArticle" style={{ textDecoration: "none" }}>
             <li>
-              <HourglassBottomIcon className="icon" />
+              <HourglassTopIcon className="icon" />
               <span>Pending Articles</span>
-            </li>
-          </Link>
-          <Link to="/article" style={{ textDecoration: "none" }}>
-            <li>
-              <AddCircleIcon className="icon" />
-              <span>Add Article</span>
             </li>
           </Link>
           <li>

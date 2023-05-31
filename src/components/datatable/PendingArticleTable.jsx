@@ -68,8 +68,8 @@ const PendingArticleTable = () => {
         className="datagrid"
         rows={data}
         columns={Penarticletablesource.concat(actionColumn)}
-        pageSize={9}
-        rowsPerPageOptions={[9]}
+        pageSize={50}
+        rowsPerPageOptions={[50]}
         getRowId={(row) => row._id}
       />
     </div>

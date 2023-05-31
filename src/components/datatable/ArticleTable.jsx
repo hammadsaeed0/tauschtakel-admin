@@ -19,8 +19,48 @@ const Datatable = () => {
   };
 
   const handleApprove = async(id) => {
-    
+    var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+var urlencoded = new URLSearchParams();
+urlencoded.append("id", id);
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: urlencoded,
+  redirect: 'follow'
+};
+
+fetch("https://cdn.tauschtakel.de/admin-article/approve", requestOptions)
+  .then(response => response.text())
+  .then(result => {
+    console.log("Approve", result);
+    fetchData()
+  })
+  .catch(error => console.log('error', error));
   };
+
+  const handleUnapprove = async(id) => {
+    var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+var urlencoded = new URLSearchParams();
+urlencoded.append("id", id);
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: urlencoded,
+  redirect: 'follow'
+};
+
+fetch("https://cdn.tauschtakel.de/admin-article/unApprove", requestOptions)
+  .then(response => response.text())
+  .then(result => fetchData())
+  .catch(error => console.log('error', error));
+  };
+  
   const handlePending = async(id) => {
     const url = 'https://cdn.tauschtakel.de/admin-article/pendingArticles';
 
@@ -35,15 +75,32 @@ setTile("Pending Article")
   const handleClosePopup = () => {
     setIsPopupOpen(false);
   };
-  useEffect(() => {
-    const fetchData = async () => {
-      const url = "https://cdn.tauschtakel.de/admin-article/allArticles";
-      const response = await fetch(url);
-      const data = await response.json();
-      setData(data.articles);
-    };
-    fetchData();
-  }, []);
+  const handleDelete = (id) => {
+    var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+var urlencoded = new URLSearchParams();
+urlencoded.append("id", id);
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: urlencoded,
+  redirect: 'follow'
+};
+
+fetch("https://cdn.tauschtakel.de/admin-article/delete", requestOptions)
+  .then(response => response.text())
+  .then(result => fetchData())
+  .catch(error => console.log('error', error));
+  }
+
+  const fetchData = async () => {
+    const url = "https://cdn.tauschtakel.de/admin-article/allArticles";
+    const response = await fetch(url);
+    const data = await response.json();
+    setData(data.articles);
+  };
 
   const actionColumn = [
     {
@@ -59,19 +116,19 @@ setTile("Pending Article")
             </Link>
             <div
               className="deleteButton"
-              // onClick={() => handleDelete(params.row._id)}
+              onClick={() => handleDelete(params.row._id)}
             >
               Delete
             </div>
             {
               params.row.status === "pending" ? <div
               className="AButton"
-              // onClick={() => handleDelete(params.row._id)}
+              onClick={() => handleApprove(params.row._id)}
             >
               Approve
             </div> : params.row.status === "approved" ? <div
               className="UButton"
-              // onClick={() => handleDelete(params.row._id)}
+              onClick={() => handleUnapprove(params.row._id)}
             >
               Unapprove
             </div> : null
@@ -81,6 +138,10 @@ setTile("Pending Article")
       },
     },
   ];
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
    const ArticleColumns = [
   {
