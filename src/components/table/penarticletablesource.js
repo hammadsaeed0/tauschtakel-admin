@@ -20,7 +20,7 @@ export const Penarticletablesource = [
   {
     field: "username",
     headerName: "Username",
-    width: 250,
+    width: 188,
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
@@ -36,7 +36,7 @@ export const Penarticletablesource = [
   {
     field: "Price",
     headerName: "Price",
-    width: 100,
+    width: 150,
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
@@ -78,7 +78,7 @@ export const Penarticletablesource = [
   {
     field: "Created At",
     headerName: "Created At",
-    width: 200,
+    width: 250,
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
