@@ -189,7 +189,7 @@ fetch("https://cdn.tauschtakel.de/admin-article/delete", requestOptions)
   {
     field: "Price",
     headerName: "Price",
-    width: 150,
+    width: 110,
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
