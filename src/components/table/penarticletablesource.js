@@ -1,17 +1,24 @@
+import "../datatable/datatable.scss";
 import { Link } from "react-router-dom";
-
 export const Penarticletablesource = [
   {
     field: "title",
     headerName: "Title",
     width: 230,
     renderCell: (params) => {
+      
       return (
         <div className="cellWithImg">
           {" "}
+          {/* <img className="cellImg" src={params.row.image[0]} alt="avatar" />{" "} */}
+          <img
+            className="cellImg"
+            src={params.row.image[0]}
+            alt="avatar"
+            // onClick={handleImageClick}
+          />
           <Link to={params.row._id}  style={{textDecoration: 'none', color:'gray'}}>
-          <img className="cellImg" src={params.row.image[0]} alt="avatar" />{" "}
-          {params.row.title}{" "}
+          {params.row.title}
           </Link>
         </div>
       );

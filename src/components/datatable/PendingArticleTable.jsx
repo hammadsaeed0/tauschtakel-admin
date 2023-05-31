@@ -5,9 +5,13 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ArticleColumns } from "../table/articletablesource";
 import { Penarticletablesource } from "../table/penarticletablesource";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 
 const PendingArticleTable = () => {
   const [data, setData] = useState([]);
+  const [id, setId] = useState([]);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleApprove = (id) => {
     var myHeaders = new Headers();
@@ -30,7 +34,14 @@ fetch("https://cdn.tauschtakel.de/admin-article/approve", requestOptions)
   })
   .catch(error => console.log('error', error));
   };
-
+  const handleOpenPopup = (id) => {
+    setIsPopupOpen(true);
+    setId(id)
+    console.log(id[0]);
+  };
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+  };
   const handleDelete = (id) => {
     var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
@@ -60,6 +71,7 @@ fetch("https://cdn.tauschtakel.de/admin-article/reject", requestOptions)
     setData(data.articles);
     console.log(data.articles);
   };
+  
 
   useEffect(() => {
     
@@ -94,6 +106,107 @@ fetch("https://cdn.tauschtakel.de/admin-article/reject", requestOptions)
     },
   ];
 
+ const Penarticletablesource = [
+  {
+    field: "title",
+    headerName: "Title",
+    width: 230,
+    renderCell: (params) => {
+      const handleImageClick = () => {
+        handleOpenPopup(params.row.image)
+      }
+      return (
+        <div className="cellWithImg">
+          {" "}
+          {/* <img className="cellImg" src={params.row.image[0]} alt="avatar" />{" "} */}
+          <img
+            className="cellImg"
+            src={params.row.image[0]}
+            alt="avatar"
+            onClick={handleImageClick}
+          />
+          <Link to={params.row._id}  style={{textDecoration: 'none', color:'gray'}}>
+          {params.row.title}
+          </Link>
+        </div>
+      );
+    },
+  },
+  {
+    field: "username",
+    headerName: "Username",
+    width: 188,
+    renderCell: (params) => {
+      return (
+        <div className="cellWithImg">
+          {" "}
+          {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
+          
+          {params.row.username}{" "}
+          
+        </div>
+      );
+    },
+  },
+  {
+    field: "Price",
+    headerName: "Price",
+    width: 110,
+    renderCell: (params) => {
+      return (
+        <div className="cellWithImg">
+          {" "}
+          {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
+          {params.row.price}{" "}
+        </div>
+      );
+    },
+  },
+  {
+    field: "Category",
+    headerName: "Category",
+    width: 150,
+    renderCell: (params) => {
+      return (
+        <div className="cellWithImg">
+          {" "}
+          {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
+          {params.row.category}{" "}
+        </div>
+      );
+    },
+  },
+  {
+    field: "Condition",
+    headerName: "Condition",
+    width: 200,
+    renderCell: (params) => {
+      return (
+        <div className="cellWithImg">
+          {" "}
+          {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
+          {params.row.condition}{" "}
+        </div>
+      );
+    },
+  },
+  {
+    field: "Created At",
+    headerName: "Created At",
+    width: 250,
+    renderCell: (params) => {
+      return (
+        <div className="cellWithImg">
+          {" "}
+          {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
+          {params.row.createdAt}{" "}
+        </div>
+      );
+    },
+  },
+]; 
+
+
   return (
     <div className="datatable">
       <div className="datatableTitle">
@@ -102,6 +215,24 @@ fetch("https://cdn.tauschtakel.de/admin-article/reject", requestOptions)
           Add New
         </Link> */}
       </div>
+      <div style={{ pointerEvents: isPopupOpen ? "none" : "auto" }}>
+      {/* <h1>My Component</h1>
+      <button onClick={handleOpenPopup}>Open Popup</button> */}
+
+      <Popup open={isPopupOpen} onClose={handleClosePopup} modal>
+        <div style={{ background: "transparent", padding: "20px", borderRadius: "4px" }}>
+         
+     
+            <img
+            style={{ width: '100%', maxHeight: '700px', objectFit: 'contain' }}
+            src={id[0]}
+            alt="avatar"
+          />
+            <button onClick={handleClosePopup}>Close</button>
+      
+        </div>
+      </Popup>
+    </div>
       <DataGrid
         className="datagrid"
         rows={data}

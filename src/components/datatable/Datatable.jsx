@@ -94,7 +94,7 @@ fetch("https://cdn.tauschtakel.de/admin-user/approveUser", requestOptions)
             </div>
             {
               params.row.verified === false ? <div
-              className="ApproveButton"
+              className="AButton"
               onClick={() => handleApproveUser(params.row._id)}
             >
               Approve
@@ -113,7 +113,7 @@ fetch("https://cdn.tauschtakel.de/admin-user/approveUser", requestOptions)
     {
       field: "user",
       headerName: "User",
-      width: 300,
+      width: 188,
       renderCell: (params) => {
         const handleImageClick = () => {
           handleOpenPopup(params.row.image)
@@ -138,7 +138,7 @@ fetch("https://cdn.tauschtakel.de/admin-user/approveUser", requestOptions)
     {
       field: "email",
       headerName: "Email",
-      width: 300,
+      width: 230,
       renderCell: (params) => {
         return (
           <div className={`cellWithStatus ${params.row.status}`}>
@@ -150,7 +150,7 @@ fetch("https://cdn.tauschtakel.de/admin-user/approveUser", requestOptions)
     {
       field: "Created At",
       headerName: "Created At",
-      width: 300,
+      width: 250,
       renderCell: (params) => {
         return (
           <div className={`cellWithStatus ${params.row.status}`}>

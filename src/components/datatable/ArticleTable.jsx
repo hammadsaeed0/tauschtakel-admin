@@ -163,7 +163,7 @@ fetch("https://cdn.tauschtakel.de/admin-article/delete", requestOptions)
             onClick={handleImageClick}
           />
           <Link to={params.row._id}  style={{textDecoration: 'none', color:'gray'}}>
-          {params.row.title}{" "}
+          {params.row.title}
           </Link>
         </div>
       );
