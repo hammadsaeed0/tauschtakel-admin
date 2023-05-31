@@ -20,7 +20,7 @@ export const Penarticletablesource = [
   {
     field: "username",
     headerName: "Username",
-    width: 150,
+    width: 250,
     renderCell: (params) => {
       return (
         <div className="cellWithImg">

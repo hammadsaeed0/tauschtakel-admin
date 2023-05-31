@@ -9,18 +9,60 @@ import { Penarticletablesource } from "../table/penarticletablesource";
 const PendingArticleTable = () => {
   const [data, setData] = useState([]);
 
-  // const handleDelete = (id) => {
-  //   setData(data.filter((item) => item._id !== id));
-  // };
+  const handleApprove = (id) => {
+    var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+var urlencoded = new URLSearchParams();
+urlencoded.append("id", id);
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: urlencoded,
+  redirect: 'follow'
+};
+
+fetch("https://cdn.tauschtakel.de/admin-article/approve", requestOptions)
+  .then(response => response.text())
+  .then(result => {
+    fetchData()
+  })
+  .catch(error => console.log('error', error));
+  };
+
+  const handleDelete = (id) => {
+    var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+var urlencoded = new URLSearchParams();
+urlencoded.append("id", id);
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: urlencoded,
+  redirect: 'follow'
+};
+
+fetch("https://cdn.tauschtakel.de/admin-article/reject", requestOptions)
+  .then(response => response.text())
+  .then(result => {
+    console.log(result);
+    fetchData()
+  })
+  .catch(error => console.log('error', error));
+  }
+  const fetchData = async () => {
+    const url = "https://cdn.tauschtakel.de/admin-article/pendingArticles";
+    const response = await fetch(url);
+    const data = await response.json();
+    setData(data.articles);
+    console.log(data.articles);
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const url = "https://cdn.tauschtakel.de/admin-article/pendingArticles";
-      const response = await fetch(url);
-      const data = await response.json();
-      setData(data.articles);
-      console.log(data.articles);
-    };
+    
     fetchData();
   }, []);
 
@@ -36,17 +78,13 @@ const PendingArticleTable = () => {
               <div className="viewButton">View</div>
             </Link>
             <div
-              className="deleteButton"
-              // onClick={() => handleDelete(params.row._id)}
+              onClick={() => handleApprove(params.row._id)}
             >
-              Delete
-            </div>
-            <Link to={`/users/${params.row._id}`} style={{ textDecoration: "none" }}>
               <div className="viewButton">Approve</div>
-            </Link>
+              </div>
             <div
               className="deleteButton"
-              // onClick={() => handleDelete(params.row._id)}
+              onClick={() => handleDelete(params.row._id)}
             >
               Reject
             </div>
