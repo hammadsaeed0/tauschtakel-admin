@@ -14,8 +14,13 @@ const Datatable = () => {
 
   const handleOpenPopup = (id) => {
     setIsPopupOpen(true);
+    setId(id[0])
+    // console.log(id[0]);
+  };
+  const handleOpenUserPopup = (id) => {
+    setIsPopupOpen(true);
     setId(id)
-    console.log(id[0]);
+    // console.log("------->",id);
   };
 
   const handleApprove = async(id) => {
@@ -151,6 +156,7 @@ fetch("https://cdn.tauschtakel.de/admin-article/delete", requestOptions)
     renderCell: (params) => {
       const handleImageClick = () => {
         handleOpenPopup(params.row.image)
+        // console.log("Title",params.row.image);
       }
       return (
         <div className="cellWithImg">
@@ -174,12 +180,27 @@ fetch("https://cdn.tauschtakel.de/admin-article/delete", requestOptions)
     headerName: "Username",
     width: 188,
     renderCell: (params) => {
+      const handleImageClick1 = () => {
+        handleOpenUserPopup(params.row.userData.image)
+        // console.log("User",params.row.userData.image);
+      }
       return (
+        // <div className="cellWithImg">
+        //   {" "}
+        //   {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}
+        //   <Link to={`/users/${params.row.uid}`}  style={{textDecoration: 'none', color:'gray'}}>
+        //   {params.row.userData.username}
+        //   </Link>
+        // </div>
         <div className="cellWithImg">
-          {" "}
-          {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}
-          <Link to={`/users/${params.row.uid}`}  style={{textDecoration: 'none', color:'gray'}}>
-          {params.row.username}
+          <img
+            className="cellImg"
+            src={params.row.userData.image}
+            alt="avatar"
+            onClick={handleImageClick1}
+          />
+          <Link to={params.row._id}  style={{textDecoration: 'none', color:'gray'}}>
+          {params.row.userData.username}
           </Link>
         </div>
       );
@@ -241,6 +262,20 @@ fetch("https://cdn.tauschtakel.de/admin-article/delete", requestOptions)
       );
     },
   },
+  {
+    field: "Deleted Time",
+    headerName: "Deleted Time",
+    width: 170,
+    renderCell: (params) => {
+      return (
+        <div className="cellWithImg">
+          {" "}
+          {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
+          {params.row.timeRemaining}{" "}
+        </div>
+      );
+    },
+  },
 ]; //temporary data export const userRows = [ { id: 1, username: "Snow", img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500", status: "active", email: "1snow@gmail.com", age: 35, }, { id: 2, username: "Jamie Lannister", img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500", email: "2snow@gmail.com", status: "passive", age: 42, }, { id: 3, username: "Lannister", img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500", email: "3snow@gmail.com", status: "pending", age: 45, }, { id: 4, username: "Stark", img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500", email: "4snow@gmail.com", status: "active", age: 16, }, { id: 5, username: "Targaryen", img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500", email: "5snow@gmail.com", status: "passive", age: 22, }, { id: 6, username: "Melisandre", img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500", email: "6snow@gmail.com", status: "active", age: 15, }, { id: 7, username: "Clifford", img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500", email: "7snow@gmail.com", status: "passive", age: 44, }, { id: 8, username: "Frances", img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500", email: "8snow@gmail.com", status: "active", age: 36, }, { id: 9, username: "Roxie", img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500", email: "snow@gmail.com", status: "pending", age: 65, }, { id: 10, username: "Roxie", img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500", email: "snow@gmail.com", status: "active", age: 65, }, ];
 
 
@@ -267,7 +302,7 @@ fetch("https://cdn.tauschtakel.de/admin-article/delete", requestOptions)
      
             <img
             style={{ width: '100%', maxHeight: '700px', objectFit: 'contain' }}
-            src={id[0]}
+            src={id}
             alt="avatar"
           />
             <button onClick={handleClosePopup}>Close</button>

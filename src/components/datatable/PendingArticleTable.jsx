@@ -141,9 +141,9 @@ fetch("https://cdn.tauschtakel.de/admin-article/reject", requestOptions)
         <div className="cellWithImg">
           {" "}
           {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
-          
-          {params.row.username}{" "}
-          
+          <Link to={`/users/${params.row.uid}`}  style={{textDecoration: 'none', color:'gray'}}>
+          {params.row.userData.username}{" "}
+          </Link>
         </div>
       );
     },
@@ -200,6 +200,20 @@ fetch("https://cdn.tauschtakel.de/admin-article/reject", requestOptions)
           {" "}
           {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
           {params.row.createdAt}{" "}
+        </div>
+      );
+    },
+  },
+  {
+    field: "Deleted Time",
+    headerName: "Deleted Time",
+    width: 170,
+    renderCell: (params) => {
+      return (
+        <div className="cellWithImg">
+          {" "}
+          {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
+          {params.row.timeRemaining}{" "}
         </div>
       );
     },
