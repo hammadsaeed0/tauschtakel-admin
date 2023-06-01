@@ -185,13 +185,6 @@ fetch("https://cdn.tauschtakel.de/admin-article/delete", requestOptions)
         // console.log("User",params.row.userData.image);
       }
       return (
-        // <div className="cellWithImg">
-        //   {" "}
-        //   {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}
-        //   <Link to={`/users/${params.row.uid}`}  style={{textDecoration: 'none', color:'gray'}}>
-        //   {params.row.userData.username}
-        //   </Link>
-        // </div>
         <div className="cellWithImg">
           <img
             className="cellImg"

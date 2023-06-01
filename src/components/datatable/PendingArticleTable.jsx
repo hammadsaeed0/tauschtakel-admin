@@ -36,8 +36,13 @@ fetch("https://cdn.tauschtakel.de/admin-article/approve", requestOptions)
   };
   const handleOpenPopup = (id) => {
     setIsPopupOpen(true);
+    setId(id[0])
+    // console.log(id[0]);
+  };
+  const handleOpenUserPopup = (id) => {
+    setIsPopupOpen(true);
     setId(id)
-    console.log(id[0]);
+    // console.log("------->",id);
   };
   const handleClosePopup = () => {
     setIsPopupOpen(false);
@@ -137,12 +142,27 @@ fetch("https://cdn.tauschtakel.de/admin-article/reject", requestOptions)
     headerName: "Username",
     width: 188,
     renderCell: (params) => {
+      const handleImageClick1 = () => {
+        handleOpenUserPopup(params.row.userData.image)
+        // console.log("User",params.row.userData.image);
+      }
       return (
+        // <div className="cellWithImg">
+        //   {" "}
+        //   {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
+        //   <Link to={`/users/${params.row.uid}`}  style={{textDecoration: 'none', color:'gray'}}>
+        //   {params.row.userData.username}{" "}
+        //   </Link>
+        // </div>
         <div className="cellWithImg">
-          {" "}
-          {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
-          <Link to={`/users/${params.row.uid}`}  style={{textDecoration: 'none', color:'gray'}}>
-          {params.row.userData.username}{" "}
+          <img
+            className="cellImg"
+            src={params.row.userData.image}
+            alt="avatar"
+            onClick={handleImageClick1}
+          />
+          <Link to={params.row._id}  style={{textDecoration: 'none', color:'gray'}}>
+          {params.row.userData.username}
           </Link>
         </div>
       );
@@ -239,7 +259,7 @@ fetch("https://cdn.tauschtakel.de/admin-article/reject", requestOptions)
      
             <img
             style={{ width: '100%', maxHeight: '700px', objectFit: 'contain' }}
-            src={id[0]}
+            src={id}
             alt="avatar"
           />
             <button onClick={handleClosePopup}>Close</button>
