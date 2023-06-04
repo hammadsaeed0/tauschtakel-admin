@@ -20,10 +20,12 @@ const Single = () => {
   const { userId } = useParams();
   useEffect(async () => {
     const url = `https://cdn.tauschtakel.de/admin-user/${userId}`;
+
     const response = await fetch(url);
 
     const text = await response.text();
     let data = JSON.parse(text);
+ 
     setId(data.user._id)
     setEmail(data.user.email);
     setImage(data.user.image);

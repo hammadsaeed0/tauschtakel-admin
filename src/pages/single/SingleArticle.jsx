@@ -32,7 +32,7 @@ const SingleArticle = () => {
   
   
     const url = `https://cdn.tauschtakel.de/admin-article/${articleId}`;
-
+console.log(articleId);
 const response = await fetch(url);
 
 const text = await response.text();

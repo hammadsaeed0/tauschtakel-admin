@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 export const dealColumns = [
   {
     field: "user",
@@ -6,9 +7,15 @@ export const dealColumns = [
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
-          {" "}
-          {/* <img className="cellImg" src={params.row.image} alt="avatar" />{" "} */}
-          {params.row.person1}{" "}
+          <img
+            className="cellImg"
+            src={params.row.person1Data.image}
+            alt="avatar"
+            // onClick={handleImageClick1}
+          />
+          <Link to={params.row.person1Id}  style={{textDecoration: 'none', color:'gray'}}>
+          {params.row.person1}
+          </Link>
         </div>
       );
     },
@@ -20,9 +27,15 @@ export const dealColumns = [
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
-          {" "}
-          {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
-          {params.row.person2}{" "}
+          <img
+            className="cellImg"
+            src={params.row.person2Data.image}
+            alt="avatar"
+            // onClick={handleImageClick1}
+          />
+          <Link to={params.row.person2Id}  style={{textDecoration: 'none', color:'gray'}}>
+          {params.row.person2}
+          </Link>
         </div>
       );
     },
@@ -34,10 +47,16 @@ export const dealColumns = [
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
-          {" "}
-          {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
-          {params.row.article1}{" "}
-        </div>
+        <img
+          className="cellImg"
+          src={params.row.article1Data.image[0]}
+          alt="avatar"
+          // onClick={handleImageClick1}
+        />
+        <Link to={`/article/${params.row.article1Id}`}  style={{textDecoration: 'none', color:'gray'}}>
+        {params.row.article1}
+        </Link>
+      </div>
       );
     },
   },
@@ -48,22 +67,27 @@ export const dealColumns = [
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
-          {" "}
-          {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
-          {params.row.article2}{" "}
-        </div>
+        <img
+          className="cellImg"
+          src={params.row.article2Data.image[0]}
+          alt="avatar"
+          // onClick={handleImageClick1}
+        />
+        <Link to={`/article/${params.row.article2Id}`}  style={{textDecoration: 'none', color:'gray'}}>
+        {params.row.article2}
+        </Link>
+      </div>
       );
     },
   },
   {
     field: "subcharge",
     headerName: "	Surcharge",
-    width: 200,
+    width: 150,
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
           {" "}
-          {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
           {params.row.surcharge}{" "}
         </div>
       );
@@ -77,7 +101,6 @@ export const dealColumns = [
       return (
         <div className="cellWithImg">
           {" "}
-          {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
           {params.row.status}{" "}
         </div>
       );
@@ -91,7 +114,6 @@ export const dealColumns = [
       return (
         <div className="cellWithImg">
           {" "}
-          {/* <img className="cellImg" src={params.row.image} alt="avatar" /> */}{" "}
           {params.row.createdAt}{" "}
         </div>
       );
