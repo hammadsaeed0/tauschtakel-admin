@@ -204,7 +204,7 @@ const [isPopupOpen, setIsPopupOpen] = useState(false);
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        Deal
+        Deals
       </div>
       <div style={{ pointerEvents: isPopupOpen ? "none" : "auto" }}>
       {/* <h1>My Component</h1>
