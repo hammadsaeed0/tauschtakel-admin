@@ -1,25 +1,64 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./login.css";
 import { useNavigate, Link } from "react-router-dom";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
-var myHeaders = new Headers();
-
-function OTP() {
+const OTP = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    var myHeaders = new Headers();
+  const [otp, setOtp] = useState(["", "", "", ""]);
+  const [otpCode, setOtpCode] = useState("");
+  const [inputValue1, setInputValue1] = useState("");
+  const [inputValue2, setInputValue2] = useState("");
+  const [showPassword1, setShowPassword1] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
+  const inputRefs = useRef([]);
+
+  useEffect(() => {
+    inputRefs.current[0].focus();
+  }, []);
+
+  const handleChange = (e, index) => {
+    const value = e.target.value;
+
+    setOtp((prevOtp) => {
+      const newOtp = [...prevOtp];
+      newOtp[index] = value;
+      return newOtp;
+    });
+
+    if (value && inputRefs.current[index + 1]) {
+      inputRefs.current[index + 1].focus();
+    }
+  };
+
+  const handleKeyDown = (e, index) => {
+    if (e.key === "Backspace" && !otp[index] && inputRefs.current[index - 1]) {
+      inputRefs.current[index - 1].focus();
+    }
+  };
+
+  const handleButtonClick = () => {
+    const code = otp.join("");
+    setOtpCode(code);
+    // console.log("OTP Code:", code);
+    // console.log("Input Value 1:", inputValue1);
+    // console.log("Input Value 2:", inputValue2);
+    if (!inputValue1) {
+      return alert("Please Fill All The Inputs")
+    }
+    if (!inputValue2) {
+      return alert("Please Fill All The Inputs")
+    }
+    if(inputValue1 === inputValue2){
+      var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
 var urlencoded = new URLSearchParams();
-urlencoded.append("otp", username);
-urlencoded.append("password", password);
+urlencoded.append("otp", code);
+urlencoded.append("password", inputValue1);
 
 var requestOptions = {
   method: 'POST',
@@ -31,8 +70,7 @@ var requestOptions = {
 fetch("https://cdn.tauschtakel.de/admin-admin/updatePassword", requestOptions)
   .then(response => response.text())
   .then(result => {
-    let data  = JSON.parse(result)
-    console.log(data);
+    let data = JSON.parse(result);
     if(data.status === "success"){
       navigate('/home')
     }
@@ -41,39 +79,101 @@ fetch("https://cdn.tauschtakel.de/admin-admin/updatePassword", requestOptions)
     }
   })
   .catch(error => console.log('error', error));
+    }else{
+     alert("Something Went Wrong")
+    }
+  };
+
+  const isButtonDisabled = otp.some((digit) => digit === "");
+
+  const handleInputChange1 = (e) => {
+    setInputValue1(e.target.value);
+  };
+
+  const handleInputChange2 = (e) => {
+    setInputValue2(e.target.value);
+  };
+
+  const togglePasswordVisibility1 = () => {
+    setShowPassword1((prevShowPassword) => !prevShowPassword);
+  };
+
+  const togglePasswordVisibility2 = () => {
+    setShowPassword2((prevShowPassword) => !prevShowPassword);
   };
 
   return (
     <div className="login-container">
-      <div className="login-form">
-        <h2>Update Login</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="username">OTP</label>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <h2>Update Password</h2>
+        <div style={{ display: "flex", justifyContent: "center" , marginTop:'10px' }}>
+          {otp.map((digit, index) => (
             <input
+              key={index}
               type="text"
-              id="username"
-              name="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              maxLength={1}
+              value={digit}
+              onChange={(e) => handleChange(e, index)}
+              onKeyDown={(e) => handleKeyDown(e, index)}
+              ref={(ref) => (inputRefs.current[index] = ref)}
+              style={{
+                width: "50px",
+                height: "40px",
+                margin: "0 5px",
+                textAlign: "center",
+                fontSize: "18px",
+                backgroundColor: "#E0E0E0",
+              }}
             />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
+          ))}
+        </div>
+        <div style={{ marginTop: "20px" }}>
+          <div style={{ position: "relative" }}>
             <input
-              type="password"
-              id="password"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              type={showPassword1 ? "text" : "password"}
+              placeholder="Password"
+              style={{ width: "300px", marginBottom: "10px", backgroundColor: "#E0E0E0", }}
+              value={inputValue1}
+              onChange={handleInputChange1}
+            />
+            <FontAwesomeIcon
+              icon={showPassword1 ? faEyeSlash : faEye}
+              onClick={togglePasswordVisibility1}
+              style={{ position: "absolute", right: "10px", top: "50%", transform: "translateY(-50%)", cursor: "pointer" }}
             />
           </div>
-          {error && <div className="error-message">{error}</div>}
-          <button>Update</button>
-        </form>
+          <div style={{ position: "relative" }}>
+            <input
+              type={showPassword2 ? "text" : "password"}
+              placeholder="Confirm Password"
+              style={{ width: "300px", marginBottom: "10px" , backgroundColor: "#E0E0E0", }}
+              value={inputValue2}
+              onChange={handleInputChange2}
+            />
+            <FontAwesomeIcon
+              icon={showPassword2 ? faEyeSlash : faEye}
+              onClick={togglePasswordVisibility2}
+              style={{ position: "absolute", right: "10px", top: "50%", transform: "translateY(-50%)", cursor: "pointer" }}
+            />
+          </div>
+          <button
+            onClick={handleButtonClick}
+            disabled={isButtonDisabled}
+            style={{
+              marginTop: "10px",
+              padding: "5px 10px",
+              fontSize: "14px",
+            }}
+          >
+            Update
+          </button>
+          
+        </div>
+        <Link to={"/reset"} style={{ textDecoration: "none", color: "#007bff", marginTop: "10px"  }}>
+          <p>Resend Mail</p>
+        </Link>
       </div>
     </div>
   );
-}
-
-export default OTP;
+          }
+  export default OTP
