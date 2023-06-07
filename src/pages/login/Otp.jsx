@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import "./login.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link } from "@mui/material";
 
 var myHeaders = new Headers();
 
-function Reset() {
+function OTP() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
@@ -18,7 +18,8 @@ function Reset() {
 myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
 var urlencoded = new URLSearchParams();
-urlencoded.append("email", username);
+urlencoded.append("otp", username);
+urlencoded.append("password", password);
 
 var requestOptions = {
   method: 'POST',
@@ -27,16 +28,16 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://cdn.tauschtakel.de/admin-admin/forgotPassword", requestOptions)
+fetch("https://cdn.tauschtakel.de/admin-admin/updatePassword", requestOptions)
   .then(response => response.text())
   .then(result => {
-    let data = JSON.parse(result);
-    if (data.status === "fail") {
-      alert("Invalid Email")
+    let data  = JSON.parse(result)
+    console.log(data);
+    if(data.status === "success"){
+      navigate('/home')
     }
-    
-    if (data.status === "success") {
-      navigate('/otp')
+    if(data.status === "error"){
+      alert(data.message)
     }
   })
   .catch(error => console.log('error', error));
@@ -45,24 +46,34 @@ fetch("https://cdn.tauschtakel.de/admin-admin/forgotPassword", requestOptions)
   return (
     <div className="login-container">
       <div className="login-form">
-        <h2>Reset Password</h2>
+        <h2>Update Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="username">Admin Email</label>
+            <label htmlFor="username">OTP</label>
             <input
-              type="email"
+              type="text"
               id="username"
               name="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
           {error && <div className="error-message">{error}</div>}
-          <button>Reset</button>
+          <button>Update</button>
         </form>
       </div>
     </div>
   );
 }
 
-export default Reset;
+export default OTP;

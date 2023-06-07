@@ -18,6 +18,7 @@ import Notification from "./components/table/notification";
 import Reset from "./pages/login/reset";
 import AdminProfile from "./pages/single/adminProfile";
 import SingleArticle from "./pages/single/SingleArticle";
+import OTP from "./pages/login/Otp";
 
 
 
@@ -31,11 +32,9 @@ function App() {
             <Route index element={<Login />} />
             <Route path="home" element={<Home />} />
             <Route path="reset" element={<Reset />} />
-            {/* <Route path="deal" element={<AllDealTable />} /> */}
-            {/* <Route path="article" element={<AllArticleTable />} /> */}
+            <Route path="otp" element={<OTP />} />
             <Route path="admin" element={<AdminProfile />} />
             <Route path="notification" element={<Notification />} />
-            {/* <Route path="pendingArticle" element={<AllPendTable />} /> */}
 
             <Route path="users">
               <Route index element={<List />} />
