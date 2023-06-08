@@ -193,7 +193,7 @@ const [isPopupOpen, setIsPopupOpen] = useState(false);
       return (
         <div className="cellWithImg">
           {" "}
-          {params.row.createdAt}{" "}
+          {params.row.timeStamp}{" "}
         </div>
       );
     },

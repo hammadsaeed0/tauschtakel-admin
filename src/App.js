@@ -19,6 +19,7 @@ import Reset from "./pages/login/reset";
 import AdminProfile from "./pages/single/adminProfile";
 import SingleArticle from "./pages/single/SingleArticle";
 import OTP from "./pages/login/Otp";
+import Backup from "./pages/single/Backup";
 
 
 
@@ -34,6 +35,7 @@ function App() {
             <Route path="reset" element={<Reset />} />
             <Route path="otp" element={<OTP />} />
             <Route path="admin" element={<AdminProfile />} />
+            <Route path="backup" element={<Backup />} />
             <Route path="notification" element={<Notification />} />
 
             <Route path="users">

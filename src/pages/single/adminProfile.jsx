@@ -10,7 +10,9 @@ import { flushSync } from "react-dom";
 const AdminProfile = () => {
   const navigate = useNavigate();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  // const [name, setName] = useState();
+  const [isNamePopupOpen, setIsNamePopupOpen] = useState(false);
+  const [isEmailPopupOpen, setIsEmailPopupOpen] = useState(false);
+  const [isPasswordPopupOpen, setIsPasswordPopupOpen] = useState(false);
   const [username, setUsername] = useState()
   const [email, setEmail] = useState();
   const [image, setImage] = useState();
@@ -18,10 +20,14 @@ const AdminProfile = () => {
 
   const [textInput1, setTextInput1] = useState('');
   const [textInput2, setTextInput2] = useState('');
+  const [textInput3, setTextInput3] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
 
   const handleTextInput1Change = (event) => {
     setTextInput1(event.target.value);
+  };
+  const handleTextInput3Change = (event) => {
+    setTextInput3(event.target.value);
   };
 
   const handleTextInput2Change = (event) => {
@@ -41,66 +47,28 @@ const AdminProfile = () => {
     setIsPopupOpen(true);
     // setId(id)
   };
+  const handleNamePopup = (id) => {
+    // setIsPopupOpen(true);
+    setIsNamePopupOpen(true)
+    // setId(id)
+  };
+  const handlePasswordPopup = (id) => {
+    // setIsPopupOpen(true);
+    setIsPasswordPopupOpen(true)
+    // setId(id)
+  };
+  const handleEmailPopup = (id) => {
+    // setIsPopupOpen(true);
+    setIsEmailPopupOpen(true)
+    // setId(id)
+  };
 
   const handleClosePopup =  async () => {
     
-//     var myHeaders = new Headers();
-// myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-
-// var urlencoded = new URLSearchParams();
-// urlencoded.append("username", textInput1);
-// urlencoded.append("password", textInput2);
-
-// var requestOptions = {
-//   method: 'POST',
-//   headers: myHeaders,
-//   body: urlencoded,
-//   redirect: 'follow'
-// };
-
-// fetch("http://3.75.129.124:3000/admin-admin/updateLogin", requestOptions)
-//   .then(response => response.text())
-//   .then(result => {
-//     let data = JSON.parse(result);
-//     // console.log(data.data.password);
-//     setUsername(data.data.userName)
-//     setEmail(data.data.password)
-
-//   })
-//   .catch(error => console.log('error', error));
-
-
-var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-
-var urlencoded = new URLSearchParams();
-urlencoded.append("userName", textInput1);
-urlencoded.append("password", textInput2);
-
-var requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  body: urlencoded,
-  redirect: 'follow'
-};
-
-fetch("http://3.75.129.124:3000/admin-admin/updateLogin", requestOptions)
-  .then(response => response.text())
-  .then(result => {
-    let data = JSON.parse(result)
-    setEmail(data.data.password)
-    setUsername(data.data.userName)
-  })
-  .catch(error => console.log('error', error));
 
 
 
-  if (!selectedImage) {
-    console.log('No image found');
-    return;
-  }
 
-  try {
     const response = await fetch(selectedImage);
     const file = await response.blob();
 
@@ -122,6 +90,7 @@ fetch("http://3.75.129.124:3000/admin-admin/updateLogin", requestOptions)
       const uploadedImage = await data.json();
       console.log('Successfully uploaded image:', uploadedImage.status);
       if(uploadedImage.status === "success"){
+        console.log(uploadedImage);
         setImage(uploadedImage.image)
   setIsPopupOpen(false)
 
@@ -130,13 +99,90 @@ fetch("http://3.75.129.124:3000/admin-admin/updateLogin", requestOptions)
     } else {
       console.log('Error occurred during image upload:', data.statusText);
     }
-  } catch (error) {
-    console.log('Error occurred during image upload:', error);
-  }
 
   }
+  const handleNameClosePopup =  async () => {
+    
+    
+    console.log(textInput1);
+    var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
+var urlencoded = new URLSearchParams();
+urlencoded.append("userName", textInput1);
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: urlencoded,
+  redirect: 'follow'
+};
+
+fetch("https://cdn.tauschtakel.de/admin-admin/updateLogin", requestOptions)
+  .then(response => response.text())
+  .then(result => {
+    let data = JSON.parse(result)
+    if(data.status === "success"){
+      setIsNamePopupOpen(false)
+      adminLogin()
+    }
+  })
+  .catch(error => console.log('error', error));
+
+  }
  
+  const handlePasswordClosePopup =  async () => {
+    var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+var urlencoded = new URLSearchParams();
+urlencoded.append("password", textInput2);
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: urlencoded,
+  redirect: 'follow'
+};
+
+fetch("https://cdn.tauschtakel.de/admin-admin/updateLogin", requestOptions)
+  .then(response => response.text())
+  .then(result => {
+   
+      let data = JSON.parse(result)
+      if(data.status === "success"){
+        setIsPasswordPopupOpen(false)
+        adminLogin()
+      }
+  })
+  .catch(error => console.log('error', error));
+  }
+
+  const handleEmailClosePopup =  async () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+    
+    var urlencoded = new URLSearchParams();
+    urlencoded.append("email", textInput3);
+    
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: urlencoded,
+      redirect: 'follow'
+    };
+    
+    fetch("https://cdn.tauschtakel.de/admin-admin/updateLogin", requestOptions)
+      .then(response => response.text())
+      .then(result => {
+        let data = JSON.parse(result)
+      if(data.status === "success"){
+        setIsEmailPopupOpen(false)
+        adminLogin()
+      }
+      })
+      .catch(error => console.log('error', error));
+  }
 
 
   const adminLogin = async () => {
@@ -174,7 +220,7 @@ useEffect(async() => {
                     />
                   </span>
               <div className="details">
-                <h1 className="itemTitle">{username} <span className="itemValue" onClick={handleOpenPopup}>
+                <h1 className="itemTitle">{username} <span className="itemValue" onClick={handleNamePopup}>
                     <img
                       style={{ width: "20px" }}
                       src="https://cdn1.iconfinder.com/data/icons/social-messaging-ui-color/254000/52-512.png"
@@ -184,18 +230,20 @@ useEffect(async() => {
                   </span></h1>
                 <div className="detailItem">
                   <span className="itemKey">Password:</span>
-                  <span className="itemValue">{email} <span className="itemValue" onClick={handleOpenPopup}>
+                  <span className="itemValue">{email} <span className="itemValue" onClick={handlePasswordPopup}>
                     <img
                       style={{ width: "20px" }}
                       src="https://cdn1.iconfinder.com/data/icons/social-messaging-ui-color/254000/52-512.png"
                       alt="avatar"
                       // onClick={handleImageClick}
                     />
-                  </span></span>
+                  </span>
+                  
+                  </span>
                 </div>
                 <div className="detailItem">
                   <span className="itemKey">Email:</span>
-                  <span className="itemValue">support@tauschtakel.de <span className="itemValue" onClick={handleOpenPopup}>
+                  <span className="itemValue">{textInput3}<span className="itemValue" onClick={handleEmailPopup}>
                     <img
                       style={{ width: "20px" }}
                       src="https://cdn1.iconfinder.com/data/icons/social-messaging-ui-color/254000/52-512.png"
@@ -208,26 +256,12 @@ useEffect(async() => {
             </div>
           </div>
         </div>
+        {/* Image */}
         <div style={{ pointerEvents: isPopupOpen ? "none" : "auto" }}>
-      {/* <h1>My Component</h1>
-      <button onClick={handleOpenPopup}>Open Popup</button> */}
 
       <Popup open={isPopupOpen} onClose={handleClosePopup} modal>
         <div style={{ background: "transparent", padding: "20px", borderRadius: "4px" }}>
         <div>
-      <input
-        type="text"
-        value={textInput1}
-        onChange={handleTextInput1Change}
-        placeholder="Enter Text 1"
-      />
-      <br />
-      <input
-        type="text"
-        value={textInput2}
-        onChange={handleTextInput2Change}
-        placeholder="Enter Text 2"
-      />
       <br />
       <input type="file" accept="image/*" onChange={handleImageSelect} />
       <br />
@@ -239,6 +273,67 @@ useEffect(async() => {
         </div>
       </Popup>
     </div>
+    {/* Name */}
+    <div style={{ pointerEvents: isNamePopupOpen ? "none" : "auto" }}>
+
+      <Popup open={isNamePopupOpen} onClose={handleNameClosePopup} modal>
+        <div style={{ background: "transparent", padding: "20px", borderRadius: "4px" }}>
+        <div>
+      <input
+        type="text"
+        value={textInput1}
+        onChange={handleTextInput1Change}
+        placeholder="Name"
+      />
+      <br />
+      {selectedImage && <img style={{width: '100%', maxHeight: '300px', objectFit: 'contain'}} src={selectedImage} alt="Selected" />}
+    </div>
+            <button onClick={handleNameClosePopup}>Update Settings</button>
+      
+        </div>
+      </Popup>
+    </div>
+    {/* Email */}
+    <div style={{ pointerEvents: isEmailPopupOpen ? "none" : "auto" }}>
+
+      <Popup open={isEmailPopupOpen} onClose={handleEmailClosePopup} modal>
+        <div style={{ background: "transparent", padding: "20px", borderRadius: "4px" }}>
+        <div>
+      <input
+        type="email"
+        value={textInput3}
+        onChange={handleTextInput3Change}
+        placeholder="Email"
+      />
+      <br />
+      {selectedImage && <img style={{width: '100%', maxHeight: '300px', objectFit: 'contain'}} src={selectedImage} alt="Selected" />}
+    </div>
+            <button onClick={handleEmailClosePopup}>Update Settings</button>
+      
+        </div>
+      </Popup>
+    </div>
+    {/* Password */}
+    <div style={{ pointerEvents: isPasswordPopupOpen ? "none" : "auto" }}>
+
+      <Popup open={isPasswordPopupOpen} onClose={handlePasswordClosePopup} modal>
+        <div style={{ background: "transparent", padding: "20px", borderRadius: "4px" }}>
+        <div>
+      <input
+        type="text"
+        value={textInput2}
+        onChange={handleTextInput2Change}
+        placeholder="Password"
+      />
+      <br />
+      {selectedImage && <img style={{width: '100%', maxHeight: '300px', objectFit: 'contain'}} src={selectedImage} alt="Selected" />}
+    </div>
+            <button onClick={handlePasswordClosePopup}>Update Settings</button>
+      
+        </div>
+      </Popup>
+    </div>
+
       </div>
     </div>
   );

@@ -10,60 +10,35 @@ const NotificationTable = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const id = searchParams.get("id");
-
-  if (id === null) {
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      var myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-
-      var urlencoded = new URLSearchParams();
-      urlencoded.append("title", title);
-      urlencoded.append("body", message);
-
-      var requestOptions = {
-        method: "POST",
-        headers: myHeaders,
-        body: urlencoded,
-        redirect: "follow",
-      };
-
-      fetch(
-        "https://cdn.tauschtakel.de/admin-notification/sendNotification",
-        requestOptions
-      )
-        .then((response) => response.text())
-        .then((result) => console.log("--------->", result))
-        .catch((error) => console.log("error", error));
-    };
-  } else {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-
-    var urlencoded = new URLSearchParams();
-    urlencoded.append("title", title);
-    urlencoded.append("body", message);
-    urlencoded.append("uid", id);
-
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: urlencoded,
-      redirect: "follow",
-    };
-
-    fetch(
-      "https://cdn.tauschtakel.de/admin-notification/sendNotification",
-      requestOptions
-    )
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
-  }
+ 
+  
+ 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    var myHeaders = new Headers();
+
+    if (id) {
+      var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+var urlencoded = new URLSearchParams();
+urlencoded.append("title", title);
+urlencoded.append("body", message);
+urlencoded.append("uid", id);
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: urlencoded,
+  redirect: 'follow'
+};
+
+fetch("https://cdn.tauschtakel.de/admin-notification/sendNotification", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log("--------->", result))
+  .catch(error => console.log('error', error));
+    }else {
+          var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
     var urlencoded = new URLSearchParams();
@@ -84,7 +59,9 @@ const NotificationTable = () => {
       .then((response) => response.text())
       .then((result) => console.log("--------->", result))
       .catch((error) => console.log("error", error));
+    }
   };
+
   const handleClear = () => {
     setMessage('')
     setTitle('')

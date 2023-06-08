@@ -86,6 +86,12 @@ const Sidebar = () => {
             <span>Admin Setting</span>
           </li>
           </Link>
+          <Link to="/backup" style={{ textDecoration: "none" }}>
+          <li>
+            <AccountCircleOutlinedIcon className="icon" />
+            <span>Backup</span>
+          </li>
+          </Link>
           <Link to="/" style={{ textDecoration: "none" }}>
             <li>
               <LogoutIcon className="icon" />
