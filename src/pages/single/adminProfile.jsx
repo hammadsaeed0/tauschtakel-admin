@@ -16,6 +16,7 @@ const AdminProfile = () => {
   const [username, setUsername] = useState()
   const [email, setEmail] = useState();
   const [image, setImage] = useState();
+  const [password, setPassword] = useState();
 
 
   const [textInput1, setTextInput1] = useState('');
@@ -195,6 +196,7 @@ let data = JSON.parse(text)
 setImage(data.data.image)
 setUsername(data.data.userName)
 setEmail(data.data.password)
+setPassword(data.data.email)
   }
 useEffect(async() => {
   adminLogin()
@@ -243,7 +245,7 @@ useEffect(async() => {
                 </div>
                 <div className="detailItem">
                   <span className="itemKey">Email:</span>
-                  <span className="itemValue">{textInput3}<span className="itemValue" onClick={handleEmailPopup}>
+                  <span className="itemValue">{password}<span className="itemValue" onClick={handleEmailPopup}>
                     <img
                       style={{ width: "20px" }}
                       src="https://cdn1.iconfinder.com/data/icons/social-messaging-ui-color/254000/52-512.png"
