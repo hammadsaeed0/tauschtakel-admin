@@ -107,7 +107,7 @@ fetch("https://cdn.tauschtakel.de/admin-admin/updatePassword", requestOptions)
           {otp.map((digit, index) => (
             <input
               key={index}
-              autoComplete="off"
+              autoComplete="new-email"
               type="text"
               maxLength={1}
               value={digit}
@@ -130,7 +130,7 @@ fetch("https://cdn.tauschtakel.de/admin-admin/updatePassword", requestOptions)
             <input
               type={showPassword1 ? "text" : "password"}
               placeholder="Password"
-              autoComplete="off"
+              autoComplete="new-email"
               style={{ width: "300px", marginBottom: "10px", backgroundColor: "#E0E0E0", }}
               value={inputValue1}
               onChange={handleInputChange1}
@@ -145,7 +145,7 @@ fetch("https://cdn.tauschtakel.de/admin-admin/updatePassword", requestOptions)
             <input
               type={showPassword2 ? "text" : "password"}
               placeholder="Confirm Password"
-              autoComplete="off"
+              autoComplete="new-email"
               style={{ width: "300px", marginBottom: "10px" , backgroundColor: "#E0E0E0", }}
               value={inputValue2}
               onChange={handleInputChange2}
