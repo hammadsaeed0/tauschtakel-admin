@@ -9,8 +9,8 @@ const OTP = () => {
   const navigate = useNavigate();
 
   const [otp, setOtp] = useState(["", "", "", ""]);
-  const [otpCode, setOtpCode] = useState("");
-  const [inputValue1, setInputValue1] = useState("");
+  const [otpCode, setOtpCode] = useState();
+  const [inputValue1, setInputValue1] = useState();
   const [inputValue2, setInputValue2] = useState("");
   const [showPassword1, setShowPassword1] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
