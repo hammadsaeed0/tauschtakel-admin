@@ -11,6 +11,8 @@ const Datatable = () => {
   const [title, setTile] = useState('Article');
   const [id, setId] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
+
 
   const handleOpenPopup = (id) => {
     setIsPopupOpen(true);
@@ -45,7 +47,14 @@ fetch("https://cdn.tauschtakel.de/admin-article/approve", requestOptions)
   })
   .catch(error => console.log('error', error));
   };
-
+  const handleDeleteClosePopup1 = (data) => {
+    if (data === "Yes") {
+      handleDelete()
+    }else{
+      setIsDeletePopupOpen(false)
+    }
+  }
+    
   const handleUnapprove = async(id) => {
     var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
@@ -80,7 +89,7 @@ setTile("Pending Article")
   const handleClosePopup = () => {
     setIsPopupOpen(false);
   };
-  const handleDelete = (id) => {
+  const handleDelete = () => {
     var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
@@ -96,10 +105,18 @@ var requestOptions = {
 
 fetch("https://cdn.tauschtakel.de/admin-article/delete", requestOptions)
   .then(response => response.text())
-  .then(result => fetchData())
+  .then(result => {
+    console.log("------->",result);
+    fetchData()
+    // setIsDeletePopupOpen(false)
+  })
   .catch(error => console.log('error', error));
   }
-
+  const handleDeletePopup = (id) => {
+    
+    setIsDeletePopupOpen(true);
+    setId(id)
+  };
   const fetchData = async () => {
     const url = "https://cdn.tauschtakel.de/admin-article/allArticles";
     const response = await fetch(url);
@@ -113,7 +130,9 @@ fetch("https://cdn.tauschtakel.de/admin-article/delete", requestOptions)
       headerName: "Action",
       width: 300,
       renderCell: (params) => {
-        console.log(params.row);
+        const handleDeleteClick = () => {
+          handleDeletePopup(params.row._id)
+        }
         return (
           <div className="cellAction">
             <Link to={`/users/${params.row._id}`} style={{ textDecoration: "none" }}>
@@ -121,7 +140,9 @@ fetch("https://cdn.tauschtakel.de/admin-article/delete", requestOptions)
             </Link>
             <div
               className="deleteButton"
-              onClick={() => handleDelete(params.row._id)}
+              // onClick={() => handleDelete(params.row._id)}
+              onClick={() => handleDeleteClick(params.row._id)}
+
             >
               Delete
             </div>
@@ -300,6 +321,22 @@ fetch("https://cdn.tauschtakel.de/admin-article/delete", requestOptions)
           />
             <button onClick={handleClosePopup}>Close</button>
       
+        </div>
+      </Popup>
+    </div>
+    <div style={{ pointerEvents: isDeletePopupOpen ? "none" : "auto" }}>
+      {/* <h1>My Component</h1>
+      <button onClick={handleOpenPopup}>Open Popup</button> */}
+
+      <Popup open={isDeletePopupOpen} onClose={handleDeleteClosePopup1} modal>
+        <div style={{ background: "transparent", padding: "20px", borderRadius: "4px", display:'flex', alignItems:'center', justifyContent:'center' }}>
+         
+            <div style={{width:'70%', height:'50px', display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+            <button style={{width:'200px', backgroundColor: "crimson", color:'white'}} onClick={() => handleDeleteClosePopup1("Yes")}>Yes</button>
+            <button style={{width:'200px'}} onClick={() => handleDeleteClosePopup1("No")}>No</button>
+            </div>
+            
+       
         </div>
       </Popup>
     </div>

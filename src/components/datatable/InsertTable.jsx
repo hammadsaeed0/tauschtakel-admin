@@ -13,70 +13,96 @@ const InsertDataTable = () => {
   const [textInput1, setTextInput1] = useState();
   const [id, setId] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-
+  const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
 
 
   const handleOpenPopup = (id) => {
     setIsPopupOpen(true);
+    setId(id);
+  };
+  const handleDeleteClosePopup1 = (data) => {
+    if (data === "Yes") {
+      handleDeleteClosePopup()
+    }else{
+      setIsDeletePopupOpen(false)
+    }
+  }
+  const handleDeletePopup = (id) => {
+    setIsDeletePopupOpen(true);
     setId(id)
   };
-  const handleClosePopup = () => {
-    // setIsPopupOpen(false);
-    // console.log(textInput1);
-    // console.log(id);
-    var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
-var urlencoded = new URLSearchParams();
-urlencoded.append("title", textInput1);
-urlencoded.append("id", id);
 
-var requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  body: urlencoded,
-  redirect: 'follow'
+  const handleDeleteClosePopup = () => {
+    
+handleDelete(id)
 };
 
-fetch("https://cdn.tauschtakel.de/admin-interest/edit", requestOptions)
-  .then(response => response.text())
-  .then(result => {
-    let data = JSON.parse(result);
-    if(data.status === "success"){
 
-    setIsPopupOpen(false);
- fetchData();
+  const handleClosePopup = () => {
+    if (!textInput1) {
+      return setIsPopupOpen(false);
+      
+    }else{
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+    var urlencoded = new URLSearchParams();
+    urlencoded.append("title", textInput1);
+    urlencoded.append("id", id);
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: urlencoded,
+      redirect: "follow",
+    };
+
+    fetch("https://cdn.tauschtakel.de/admin-interest/edit", requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        let data = JSON.parse(result);
+        if (data.status === "success") {
+          setIsPopupOpen(false);
+          setTextInput1('')
+          fetchData();
+        }
+      })
+      .catch((error) => console.log("error", error));
     }
-  })
-  .catch(error => console.log('error', error));
+    
   };
 
   const handleDelete = (id) => {
     var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
-var urlencoded = new URLSearchParams();
-urlencoded.append("id", id);
+    var urlencoded = new URLSearchParams();
+    urlencoded.append("id", id);
 
-var requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  body: urlencoded,
-  redirect: 'follow'
-};
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: urlencoded,
+      redirect: "follow",
+    };
 
-fetch("https://cdn.tauschtakel.de/admin-interest/delete", requestOptions)
-  .then(response => response.text())
-  .then(result => fetchData())
-  .catch(error => console.log('error', error));
+    fetch("https://cdn.tauschtakel.de/admin-interest/delete", requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        setIsDeletePopupOpen(false)
+        fetchData()
+
+      })
+      .catch((error) => console.log("error", error));
   };
 
   const handleEdit = (id) => {
-    handleOpenPopup(id)
+    handleOpenPopup(id);
   };
-const handleTextInput1Change = (event) =>{
-  setTextInput1(event.target.value);
-}
+  const handleTextInput1Change = (event) => {
+    setTextInput1(event.target.value);
+  };
 
   const fetchData = async () => {
     const url = "https://cdn.tauschtakel.de/admin-interest/getAll";
@@ -85,9 +111,7 @@ const handleTextInput1Change = (event) =>{
     setData(data.data);
   };
 
-
   useEffect(() => {
-    
     fetchData();
   }, []);
 
@@ -97,6 +121,9 @@ const handleTextInput1Change = (event) =>{
       headerName: "Action",
       width: 150,
       renderCell: (params) => {
+        const handleDeleteClick = () => {
+          handleDeletePopup(params.row._id)
+        }
         return (
           <div className="cellAction">
             {/* <Link to={`/interest/${params.row._id}`} style={{ textDecoration: "none" }}>
@@ -110,7 +137,8 @@ const handleTextInput1Change = (event) =>{
             </div>
             <div
               className="deleteButton"
-              onClick={() => handleDelete(params.row._id)}
+              // onClick={() => handleDelete(params.row._id)}
+              onClick={() => handleDeleteClick(params.row._id)}
             >
               Delete
             </div>
@@ -122,28 +150,46 @@ const handleTextInput1Change = (event) =>{
 
   return (
     <div className="datatable">
-    <div style={{ pointerEvents: isPopupOpen ? "none" : "auto" }}>
-
-      <Popup open={isPopupOpen} onClose={handleClosePopup} modal>
-        <div style={{ background: "transparent", padding: "20px", borderRadius: "4px" }}>
-        <div>
-      <input
-        type="text"
-        value={textInput1}
-        onChange={handleTextInput1Change}
-        placeholder="Name"
-      />
-      <br />
-      {/* {selectedImage && <img style={{width: '100%', maxHeight: '300px', objectFit: 'contain'}} src={selectedImage} alt="Selected" />} */}
-    </div>
+      <div style={{ pointerEvents: isPopupOpen ? "none" : "auto" }}>
+        <Popup open={isPopupOpen} onClose={handleClosePopup} modal>
+          <div
+            style={{
+              background: "transparent",
+              padding: "20px",
+              borderRadius: "4px",
+            }}
+          >
+            <div>
+              <input
+                type="text"
+                value={textInput1}
+                onChange={handleTextInput1Change}
+                placeholder="Name"
+              />
+              <br />
+              {/* {selectedImage && <img style={{width: '100%', maxHeight: '300px', objectFit: 'contain'}} src={selectedImage} alt="Selected" />} */}
+            </div>
             <button onClick={handleClosePopup}>Update Settings</button>
-      
+          </div>
+        </Popup>
+      </div>
+      <div style={{ pointerEvents: isDeletePopupOpen ? "none" : "auto" }}>
+      {/* <h1>My Component</h1>
+      <button onClick={handleOpenPopup}>Open Popup</button> */}
+
+      <Popup open={isDeletePopupOpen} onClose={handleDeleteClosePopup1} modal>
+        <div style={{ background: "transparent", padding: "20px", borderRadius: "4px", display:'flex', alignItems:'center', justifyContent:'center' }}>
+         
+            <div style={{width:'70%', height:'50px', display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+            <button style={{width:'200px', backgroundColor: "crimson", color:'white'}} onClick={() => handleDeleteClosePopup1("Yes")}>Yes</button>
+            <button style={{width:'200px'}} onClick={() => handleDeleteClosePopup1("No")}>No</button>
+            </div>
+            
+       
         </div>
       </Popup>
     </div>
-      <div className="datatableTitle">
-      Interest
-      </div>
+      <div className="datatableTitle">Interest</div>
       <DataGrid
         className="datagrid"
         rows={data}

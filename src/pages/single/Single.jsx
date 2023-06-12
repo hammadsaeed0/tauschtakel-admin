@@ -84,7 +84,6 @@ const Single = () => {
   };
   const sendNotification = () =>{
     navigate(`/notification?id=${id}`)
-    // console.log(id);
   }
   return (
     <div className="single">

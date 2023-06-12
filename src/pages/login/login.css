@@ -45,6 +45,7 @@ input {
 .reset-link {
   margin-top: 10px;
   text-align: right;
+  width: 420px;
 }
 
 .reset-link a {
@@ -76,4 +77,8 @@ button:hover {
 .error-message {
   color: red;
   margin-bottom: 20px;
+}
+
+.password-field {
+  flex-direction: column;
 }

@@ -67,46 +67,52 @@ const AdminProfile = () => {
   const handleClosePopup =  async () => {
     
 
+if(!selectedImage){
+         return setIsPopupOpen(false)
+}else{
+  const response = await fetch(selectedImage);
+  const file = await response.blob();
+
+  const formData = new FormData();
+  formData.append('image', file);
 
 
+  for (const [key, value] of formData.entries()) {
+    console.log(key + ', ' + value);
+  }
 
-    const response = await fetch(selectedImage);
-    const file = await response.blob();
+  const data = await fetch('https://cdn.tauschtakel.de/admin-admin/addImage', {
+    method: 'POST',
+    body: formData,
+  });
 
-    const formData = new FormData();
-    formData.append('image', file);
+  if (data.ok) {
+    const uploadedImage = await data.json();
+    console.log('Successfully uploaded image:', uploadedImage.status);
+    if(uploadedImage.status === "success"){
+      console.log(uploadedImage);
+      setImage(uploadedImage.image)
+setIsPopupOpen(false)
 
-    console.log(file);
 
-    for (const [key, value] of formData.entries()) {
-      console.log(key + ', ' + value);
     }
-
-    const data = await fetch('https://cdn.tauschtakel.de/admin-admin/addImage', {
-      method: 'POST',
-      body: formData,
-    });
-
-    if (data.ok) {
-      const uploadedImage = await data.json();
-      console.log('Successfully uploaded image:', uploadedImage.status);
-      if(uploadedImage.status === "success"){
-        console.log(uploadedImage);
-        setImage(uploadedImage.image)
-  setIsPopupOpen(false)
+  } else {
+    console.log('Error occurred during image upload:', data.statusText);
+  }
+}
 
 
-      }
-    } else {
-      console.log('Error occurred during image upload:', data.statusText);
-    }
+   
 
   }
   const handleNameClosePopup =  async () => {
     
     
     console.log(textInput1);
-    var myHeaders = new Headers();
+    if(!textInput1){
+    return  setIsNamePopupOpen(false)
+    }else {
+      var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
 var urlencoded = new URLSearchParams();
@@ -125,15 +131,21 @@ fetch("https://cdn.tauschtakel.de/admin-admin/updateLogin", requestOptions)
     let data = JSON.parse(result)
     if(data.status === "success"){
       setIsNamePopupOpen(false)
+      setTextInput1("")
       adminLogin()
     }
   })
   .catch(error => console.log('error', error));
+    }
+    
 
   }
  
   const handlePasswordClosePopup =  async () => {
-    var myHeaders = new Headers();
+    if(!textInput2){
+      return  setIsPasswordPopupOpen(false)
+    }else{
+      var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
 var urlencoded = new URLSearchParams();
@@ -153,36 +165,45 @@ fetch("https://cdn.tauschtakel.de/admin-admin/updateLogin", requestOptions)
       let data = JSON.parse(result)
       if(data.status === "success"){
         setIsPasswordPopupOpen(false)
+        setTextInput2("")
         adminLogin()
       }
   })
   .catch(error => console.log('error', error));
+    }
+    
   }
 
   const handleEmailClosePopup =  async () => {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-    
-    var urlencoded = new URLSearchParams();
-    urlencoded.append("email", textInput3);
-    
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: urlencoded,
-      redirect: 'follow'
-    };
-    
-    fetch("https://cdn.tauschtakel.de/admin-admin/updateLogin", requestOptions)
-      .then(response => response.text())
-      .then(result => {
-        let data = JSON.parse(result)
-      if(data.status === "success"){
-        setIsEmailPopupOpen(false)
-        adminLogin()
-      }
-      })
-      .catch(error => console.log('error', error));
+    if(!textInput3){
+       return setIsEmailPopupOpen(false)
+    }else{
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+      
+      var urlencoded = new URLSearchParams();
+      urlencoded.append("email", textInput3);
+      
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: urlencoded,
+        redirect: 'follow'
+      };
+      
+      fetch("https://cdn.tauschtakel.de/admin-admin/updateLogin", requestOptions)
+        .then(response => response.text())
+        .then(result => {
+          let data = JSON.parse(result)
+        if(data.status === "success"){
+          setIsEmailPopupOpen(false)
+          setTextInput3("")
+          adminLogin()
+        }
+        })
+        .catch(error => console.log('error', error));
+    }
+   
   }
 
 

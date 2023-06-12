@@ -3,6 +3,8 @@ import "./login.css";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 var myHeaders = new Headers();
 
@@ -11,7 +13,11 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [showPassword1, setShowPassword1] = useState(false);
 
+  const togglePasswordVisibility1 = () => {
+    setShowPassword1((prevShowPassword) => !prevShowPassword);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -52,7 +58,6 @@ function Login() {
             <label htmlFor="username">Username</label>
             <input
               type="text"
-              autoComplete="off"
               id="username"
               name="username"
               value={username}
@@ -60,21 +65,28 @@ function Login() {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+             <div style={{ position: "relative" }}>
             <input
-              type="password"
-              id="password"
-              autoComplete="off"
+              type={showPassword1 ? "text" : "password"}
+              placeholder="Password"
+              autoComplete="new-email"
+              style={{ width: "400px", marginBottom: "10px", }}
               name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            <FontAwesomeIcon
+              icon={showPassword1 ? faEyeSlash : faEye}
+              onClick={togglePasswordVisibility1}
+              style={{ position: "absolute", right: "10px", top: "50%", transform: "translateY(-50%)", cursor: "pointer" }}
+            />
+          </div>
           </div>
           {error && <div className="error-message">{error}</div>}
-          <button>Login</button>
+          <button style={{ width:'420px', cursor: "pointer" }} >Login</button>
         </form>
         <div className="reset-link">
-          <Link to="/reset">Forgot password</Link>
+          <Link to="/reset">Forgot Password</Link>
         </div>
       </div>
     </div>

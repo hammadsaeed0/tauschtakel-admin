@@ -95,6 +95,22 @@
   background-color: #f5f5f5;
 }
 
+.deleteButton {
+  padding: 5px 20px;
+  border-radius: 5px;
+  margin-left: 10px;
+  color: crimson;
+  border: 1px dotted rgba(220, 20, 60, 0.6);
+  cursor: pointer;
+}
+.sendButton {
+  padding: 5px 20px;
+  border-radius: 5px;
+  margin-left: 10px;
+  color: green;
+  border: 1px dotted rgba(0, 179, 24, 0.6);
+  cursor: pointer;
+}
 .textarea:focus {
   outline: none;
   border-color: #007bff;

@@ -92,37 +92,30 @@ fetch("https://cdn.tauschtakel.de/admin-notification/sendNotification", requestO
                     onChange={(e) => setMessage(e.target.value)}
                   ></textarea>
                 </div>
-                <div style={{ display: "flex" , justifySelf:'center' }}>
-                  <button
-                    style={{
-                      padding: "10px 20px",
-                      marginRight:'10px',
-                      background: "transparent",
-                      color: "crimson",
-                      border: "none",
-                      borderRadius: "4px",
-                      cursor: "pointer",
-                      border:'2px solid crimson'
-                    }}
+                <div style={{ display: "flex" , alignSelf:'end' }}>
+                  {/* <button
+                    className="deleteButton"
                     onClick={handleClear}
                   >
                     Clear
-                  </button>
-                  <button
-                    type="submit"
-                    style={{
-                      padding: "10px 20px",
-                      marginRight:'10px',
-                      background: "transparent",
-                      color: "#20AC73",
-                      border: "none",
-                      borderRadius: "4px",
-                      cursor: "pointer",
-                      border:'2px solid #20AC73'
-                    }}
-                  >
-                    Send
-                  </button>
+                  </button> */}
+                  <div className="cellAction">
+            <div
+              className="deleteButton"
+              onClick={handleClear}
+            >
+              Clear
+            </div>
+          </div>
+            
+          <div className="cellAction">
+            <div
+              className="sendButton"
+              onClick={() => handleSubmit()}
+            >
+              Send
+            </div>
+          </div>
                 </div>
               </form>
             </div>

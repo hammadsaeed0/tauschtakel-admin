@@ -17,6 +17,7 @@ import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { Link } from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
+import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import { useContext } from "react";
 
 const Sidebar = () => {
@@ -88,8 +89,8 @@ const Sidebar = () => {
           </Link>
           <Link to="/backup" style={{ textDecoration: "none" }}>
           <li>
-            <AccountCircleOutlinedIcon className="icon" />
-            <span>Backup</span>
+            <CloudDownloadIcon className="icon" />
+            <span>Backup Database</span>
           </li>
           </Link>
           <Link to="/" style={{ textDecoration: "none" }}>
