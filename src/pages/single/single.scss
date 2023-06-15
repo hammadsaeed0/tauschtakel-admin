@@ -28,6 +28,16 @@
           border-radius: 0px 0px 0px 5px;
         }
 
+        .imageContainer {
+          display: flex;
+          flex-direction: column;
+        }
+        
+        .imageItem {
+          width: 100px;
+          height: 100px;
+          margin-bottom: 10px;
+        }
         .item {
           display: flex;
           gap: 20px;
@@ -74,7 +84,6 @@
       padding: 20px;
       margin: 10px 20px;
     }
-
     .title {
       font-size: 16px;
       color: lightgray;
@@ -96,12 +105,16 @@
 }
 
 .deleteButton {
+  width: 50px;
   padding: 5px 20px;
   border-radius: 5px;
-  margin-left: 10px;
+  // margin-left: 0px;
   color: crimson;
   border: 1px dotted rgba(220, 20, 60, 0.6);
   cursor: pointer;
+}
+.lowercase-text {
+  text-transform: lowercase;
 }
 .sendButton {
   padding: 5px 20px;

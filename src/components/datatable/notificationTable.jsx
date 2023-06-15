@@ -75,7 +75,7 @@ fetch("https://cdn.tauschtakel.de/admin-notification/sendNotification", requestO
             <div className="item">
               <form onSubmit={handleSubmit}>
                 <div>
-                  <label htmlFor="title">Title:</label>
+                  <label htmlFor="title" style={{fontSize:'14px', color:'gray'}}>Title:</label>
                   <input
                     type="text"
                     id="title"
@@ -84,7 +84,7 @@ fetch("https://cdn.tauschtakel.de/admin-notification/sendNotification", requestO
                   />
                 </div>
                 <div>
-                  <label htmlFor="message">Text</label>
+                  <label htmlFor="message" style={{fontSize:'14px', color:'gray'}}>Text</label>
                   <textarea
                     className="textarea"
                     id="message"
@@ -92,7 +92,7 @@ fetch("https://cdn.tauschtakel.de/admin-notification/sendNotification", requestO
                     onChange={(e) => setMessage(e.target.value)}
                   ></textarea>
                 </div>
-                <div style={{ display: "flex" , alignSelf:'end' }}>
+                <div style={{ display: "flex" , alignSelf:'end'  }}>
                   {/* <button
                     className="deleteButton"
                     onClick={handleClear}
