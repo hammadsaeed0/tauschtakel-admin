@@ -84,7 +84,7 @@ fetch("https://cdn.tauschtakel.de/admin-notification/sendNotification", requestO
                   />
                 </div>
                 <div>
-                  <label htmlFor="message" style={{fontSize:'14px', color:'gray'}}>Text</label>
+                  <label htmlFor="message" style={{fontSize:'14px', color:'gray'}}>Text:</label>
                   <textarea
                     className="textarea"
                     id="message"
