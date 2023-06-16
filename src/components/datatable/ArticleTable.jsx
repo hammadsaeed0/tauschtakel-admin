@@ -108,7 +108,7 @@ fetch("https://cdn.tauschtakel.de/admin-article/delete", requestOptions)
   .then(result => {
     console.log("------->",result);
     fetchData()
-    // setIsDeletePopupOpen(false)
+    setIsDeletePopupOpen(false)
   })
   .catch(error => console.log('error', error));
   }
@@ -135,7 +135,7 @@ fetch("https://cdn.tauschtakel.de/admin-article/delete", requestOptions)
         }
         return (
           <div className="cellAction">
-            <Link to={`/users/${params.row._id}`} style={{ textDecoration: "none" }}>
+            <Link to={`/article/${params.row._id}`} style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
             </Link>
             <div

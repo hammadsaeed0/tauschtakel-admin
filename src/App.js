@@ -5,10 +5,10 @@ import Single from "./pages/single/Single";
 import SignleArtle from './pages/single/SingleArticle'
 import SingleInterest from "./pages/single/SingleInterest";
 import New from "./pages/new/New";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { productInputs, userInputs } from "./formSource";
 import "./style/dark.scss";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import AllDealTable from "./components/table/allDealTable";
 import AllArticleTable from "./components/table/allArticleTable";
@@ -21,13 +21,22 @@ import SingleArticle from "./pages/single/SingleArticle";
 import OTP from "./pages/login/Otp";
 import Backup from "./pages/single/Backup";
 
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
+  return null;
+};
 function App() {
   const { darkMode } = useContext(DarkModeContext);
+  
   return (
     <div className={darkMode ? "app dark" : "app"}>
       <BrowserRouter>
+      <ScrollToTop />
         <Routes>
           <Route path="/">
             <Route index element={<Login />} />

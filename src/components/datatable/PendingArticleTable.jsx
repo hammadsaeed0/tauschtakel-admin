@@ -91,7 +91,7 @@ fetch("https://cdn.tauschtakel.de/admin-article/reject", requestOptions)
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to={`/users/${params.row._id}`} style={{ textDecoration: "none" }}>
+            <Link to={`/article/${params.row._id}`} style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
             </Link>
             <div
