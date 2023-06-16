@@ -135,7 +135,7 @@ const UList = () => {
                 <div className="cellWrapper">
                   <img
                     className="image"
-                    src={row.article2Data.image[0]}
+                    src={row.article1Data.image[0]}
                     alt="avatar"
                     onClick={() => handleImageClick(row.article2Data.image[0])}
                   />
@@ -143,7 +143,7 @@ const UList = () => {
                     to={`/article/${row.article2Id}`}
                     style={{ textDecoration: "none", color: "gray" }}
                   >
-                    {row.article2}
+                    {row.article1}
                   </Link>
                 </div>
               </TableCell>
