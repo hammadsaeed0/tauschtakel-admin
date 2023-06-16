@@ -125,6 +125,17 @@
 
   cursor: pointer;
 }
+.sendButton2 {
+  margin-left: 10px;
+  width: 60px;
+  padding: 5px 15px;
+  border-radius: 5px;
+  color: yellow;
+
+  border: 1px dotted rgb(229, 255, 0);
+
+  cursor: pointer;
+}
 .textarea:focus {
   outline: none;
   border-color: #007bff;

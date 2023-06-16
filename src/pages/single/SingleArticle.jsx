@@ -241,7 +241,7 @@ fetch("https://cdn.tauschtakel.de/admin-article/approve", requestOptions)
                     {like} <span className="itemValue"></span>
                   </span>
                 </div>
-                <div style={{ width: "10px" }}></div>{" "}
+                <div style={{ width: "10px" , height:'10px'}}></div>{" "}
 
                 {/* Button Section  */}
                 <div style={buttonGroupStyle}>
