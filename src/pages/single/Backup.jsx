@@ -15,7 +15,7 @@ const Backup = () => {
     try {
       setLoading(true); // Set loading state to true
 
-      const response = await fetch('http://3.75.129.124:3000/admin-admin/dbBackup', {
+      const response = await fetch('https://cdn.tauschtakel.de/admin-admin/dbBackup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
