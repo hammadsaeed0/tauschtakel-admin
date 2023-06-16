@@ -61,7 +61,8 @@ fetch("https://cdn.tauschtakel.de/admin-article/approve", requestOptions)
   const handleClosePopup = () => {
     setIsPopupOpen(false);
   };
-  const handleDelete = (id) => {
+  const handleDelete = () => {
+   
     var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
