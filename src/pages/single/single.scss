@@ -72,7 +72,7 @@
       }
 
       .right {
-        flex: 2;
+        flex: 1;
       }
     }
 
@@ -130,9 +130,8 @@
   width: 60px;
   padding: 5px 15px;
   border-radius: 5px;
-  color: yellow;
-
-  border: 1px dotted rgb(229, 255, 0);
+  color: #FFA500      ;
+      border: 1px dotted #FFA500;
 
   cursor: pointer;
 }

@@ -53,9 +53,9 @@ const Backup = () => {
       }}
     >
       {loading && <div>Loading...</div>}
-      <button style={{width:'400px'}} onClick={handleDownload} disabled={loading}>
+      <div style={{width:'400px', height:'40px', backgroundColor:'red'}} onClick={handleDownload} disabled={loading}>
         {loading ? 'Downloading...' : 'Download Backup'}
-      </button>
+      </div>
     </div>
       </div>
     </div>

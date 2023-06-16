@@ -317,7 +317,8 @@ fetch("https://cdn.tauschtakel.de/admin-article/approve", requestOptions)
             </div>
           </div>
           <div className="right">
-          <Chart title="Last 6 Months (Revenue)" aspect={2 / 1} />
+          <Chart aspect={3 / 1} title="User Spending ( Last 6 Months)" />
+
         </div>
         </div>
         <div style={{ width: "100%", height: "100%", paddingLeft: "20px" }}>
