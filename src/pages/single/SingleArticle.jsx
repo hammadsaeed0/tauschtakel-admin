@@ -238,7 +238,7 @@ fetch("https://cdn.tauschtakel.de/admin-article/approve", requestOptions)
                 <div className="detailItem">
                   <span className="itemKey">Like: </span>
                   <span className="itemValue">
-                    {like} <span className="itemValue"></span>
+                  {like} <span className="itemValue"></span>
                   </span>
                 </div>
                 <div style={{ width: "10px" , height:'10px'}}></div>{" "}
