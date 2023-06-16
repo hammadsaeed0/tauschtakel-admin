@@ -11,6 +11,8 @@ import "reactjs-popup/dist/index.css";
 const PendingArticleTable = () => {
   const [data, setData] = useState([]);
   const [id, setId] = useState([]);
+  const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
+
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleApprove = (id) => {
@@ -34,6 +36,18 @@ fetch("https://cdn.tauschtakel.de/admin-article/approve", requestOptions)
   })
   .catch(error => console.log('error', error));
   };
+  const handleDeletePopup = (id) => {
+    
+    setIsDeletePopupOpen(true);
+    setId(id)
+  };
+  const handleDeleteClosePopup1 = (data) => {
+    if (data === "Yes") {
+      handleDelete()
+    }else{
+      setIsDeletePopupOpen(false)
+    }
+  }
   const handleOpenPopup = (id) => {
     setIsPopupOpen(true);
     setId(id[0])
@@ -64,7 +78,7 @@ var requestOptions = {
 fetch("https://cdn.tauschtakel.de/admin-article/reject", requestOptions)
   .then(response => response.text())
   .then(result => {
-    console.log(result);
+    setIsDeletePopupOpen(false)
     fetchData()
   })
   .catch(error => console.log('error', error));
@@ -89,6 +103,9 @@ fetch("https://cdn.tauschtakel.de/admin-article/reject", requestOptions)
       headerName: "Action",
       width: 350,
       renderCell: (params) => {
+        const handleDeleteClick = () => {
+          handleDeletePopup(params.row._id)
+        }
         return (
           <div className="cellAction">
             <Link to={`/article/${params.row._id}`} style={{ textDecoration: "none" }}>
@@ -101,7 +118,9 @@ fetch("https://cdn.tauschtakel.de/admin-article/reject", requestOptions)
               </div>
             <div
               className="deleteButton"
-              onClick={() => handleDelete(params.row._id)}
+              // onClick={() => handleDelete(params.row._id)}
+              onClick={() => handleDeleteClick(params.row)}
+
             >
               Reject
             </div>
@@ -264,6 +283,22 @@ fetch("https://cdn.tauschtakel.de/admin-article/reject", requestOptions)
           />
             <button onClick={handleClosePopup}>Close</button>
       
+        </div>
+      </Popup>
+    </div>
+    <div style={{ pointerEvents: isDeletePopupOpen ? "none" : "auto" }}>
+      {/* <h1>My Component</h1>
+      <button onClick={handleOpenPopup}>Open Popup</button> */}
+
+      <Popup open={isDeletePopupOpen} onClose={handleDeleteClosePopup1} modal>
+        <div style={{ background: "transparent", padding: "20px", borderRadius: "4px", display:'flex', alignItems:'center', justifyContent:'center' }}>
+         
+            <div style={{width:'70%', height:'50px', display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+            <button style={{width:'200px', backgroundColor: "crimson", color:'white'}} onClick={() => handleDeleteClosePopup1("Yes")}>Yes</button>
+            <button style={{width:'200px'}} onClick={() => handleDeleteClosePopup1("No")}>No</button>
+            </div>
+            
+       
         </div>
       </Popup>
     </div>
