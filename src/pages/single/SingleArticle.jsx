@@ -50,7 +50,7 @@ const SingleArticle = () => {
     setavailableForDeal(data.article.availableForDeal);
     setcondition(data.article.condition);
     settime(data.time);
-    setDeleteTime(data.article.timeRemaining);
+    setDeleteTime(data.article.createdAt);
     setstatus(data.article.status);
     let like = data.article.likers.length;
     setLike(like);
@@ -97,7 +97,6 @@ const SingleArticle = () => {
   };
   const buttonGroupStyle = {
     display: "flex",
-    justifyContent: "center",
   };
 
   const handleDelete = (id) => {
@@ -225,15 +224,15 @@ fetch("https://cdn.tauschtakel.de/admin-article/approve", requestOptions)
                 </div>
                 <div style={{ height: "20px" }}></div>
                 <div className="detailItem">
-                  <span className="itemKey">Online Sence:</span>
+                  <span className="itemKey">Online Since:</span>
                   <span className="itemValue">
-                    {time} <span className="itemValue"></span>
+                    {Deletetime} <span className="itemValue"></span>
                   </span>
                 </div>
                 <div className="detailItem">
-                  <span className="itemKey">Deleting Time :</span>
+                  <span className="itemKey">Deleting Time:</span>
                   <span className="itemValue">
-                    {Deletetime} <span className="itemValue"></span>
+                    {time} <span className="itemValue"></span>
                   </span>
                 </div>
                 <div className="detailItem">
@@ -242,9 +241,11 @@ fetch("https://cdn.tauschtakel.de/admin-article/approve", requestOptions)
                     {like} <span className="itemValue"></span>
                   </span>
                 </div>
+                <div style={{ width: "10px" }}></div>{" "}
+
                 {/* Button Section  */}
                 <div style={buttonGroupStyle}>
-                  <Button
+                  {/* <Button
                     variant="outlined"
                     color="error"
                     size="small"
@@ -253,30 +254,58 @@ fetch("https://cdn.tauschtakel.de/admin-article/approve", requestOptions)
                     onClick={() => handleDelete(articleId)}
                   >
                     <p style={{ textTransform: "capitalize" , fontSize:'14px' }}>Delete</p>
-                  </Button>
+                  </Button> */}
+                   <div
+              className="deleteButton"
+              onClick={() => handleDelete(articleId)}
+
+            >
+              Delete
+            </div>
                   <div style={{ width: "10px" }}></div>{" "}
                   {/* Add space between buttons */}
                   {/* Add space between buttons */}
                   {
-                    status === "pending" ?<Button
-                    variant="outlined"
-                    color="error"
-                    size="small"
-                    style={buttonStyle3}
-                    onClick={() => handleApprove(articleId)}
+                    status === "pending" ?
+                  //   <Button
+                  //   variant="outlined"
+                  //   color="error"
+                  //   size="small"
+                  //   style={buttonStyle3}
+                  //   onClick={() => handleApprove(articleId)}
 
-                  >
-                    <p style={{ textTransform: "capitalize",fontSize:'14px' }}>Approve</p>
-                  </Button> : <Button
-                    variant="outlined"
-                    color="error"
-                    size="small"
-                    style={buttonStyle2}
+                  // >
+                  //   <p style={{ textTransform: "capitalize",fontSize:'14px' }}>Approve</p>
+                  // </Button> 
+                  <div
+                  className="sendButton"
+                  onClick={() => handleApprove(articleId)}
+    
+                >
+                  Approve
+                </div>
+
+                  
+                  : 
+                  
+                  // <Button
+                  //   variant="outlined"
+                  //   color="error"
+                  //   size="small"
+                  //   style={buttonStyle2}
+                  //   onClick={() => handleUnapprove(articleId)}
+
+                  // >
+                  //   <p style={{ textTransform: "capitalize" , fontSize:'14px' }}>Unapprove</p>
+                  // </Button>
+                  <div
+                  className="sendButton2"
                     onClick={() => handleUnapprove(articleId)}
-
-                  >
-                    <p style={{ textTransform: "capitalize" , fontSize:'14px' }}>Unapprove</p>
-                  </Button>
+                  
+    
+                >
+                  Unapprove
+                </div>
                   }
                   
                   <div style={{ width: "10px" }}></div>{" "}
