@@ -9,6 +9,9 @@ import { useEffect, useState } from "react";
 import InsertDataTable from "../../components/datatable/InsertTable";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 import ArticleTabe from "../../components/datatable/ArticleTable";
 
 const SingleArticle = () => {
@@ -30,6 +33,9 @@ const SingleArticle = () => {
   const [id, setId] = useState();
   const [like, setLike] = useState();
   const { articleId } = useParams();
+  const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
+  
+
   useEffect(async () => {
     // const url = `https://cdn.tauschtakel.de/admin-article/${userId}`;
 
@@ -99,12 +105,12 @@ const SingleArticle = () => {
     display: "flex",
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = () => {
     var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
 var urlencoded = new URLSearchParams();
-urlencoded.append("id", id);
+urlencoded.append("id", articleId);
 
 var requestOptions = {
   method: 'POST',
@@ -139,6 +145,21 @@ fetch("https://cdn.tauschtakel.de/admin-article/approve", requestOptions)
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
   }
+  const handleDeleteClick = () => {
+    handleDeletePopup(articleId);
+  };
+  const handleDeletePopup = () => {
+    setIsDeletePopupOpen(true);
+ 
+  };
+  const handleDeleteClosePopup1 = (data) => {
+    setIsDeletePopupOpen(false);
+    if(data === "Yes"){
+      handleDelete()
+    }else{
+      setIsDeletePopupOpen(false);
+    }
+  };
   const handleUnapprove = (id) => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
@@ -257,7 +278,9 @@ fetch("https://cdn.tauschtakel.de/admin-article/approve", requestOptions)
                   </Button> */}
                    <div
               className="deleteButton"
-              onClick={() => handleDelete(articleId)}
+              // onClick={() => handleDelete(articleId)}
+              onClick={() => handleDeleteClick(articleId)}
+
 
             >
               Delete
@@ -317,6 +340,50 @@ fetch("https://cdn.tauschtakel.de/admin-article/approve", requestOptions)
             </div>
           </div>
           <div className="right">
+          <div style={{ pointerEvents: isDeletePopupOpen ? "none" : "auto" }}>
+        {/* <h1>My Component</h1>
+      <button onClick={handleOpenPopup}>Open Popup</button> */}
+
+        <Popup open={isDeletePopupOpen} onClose={handleDeleteClosePopup1} modal>
+          <div
+            style={{
+              background: "transparent",
+              padding: "20px",
+              borderRadius: "4px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <div
+              style={{
+                width: "70%",
+                height: "50px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <button
+                style={{
+                  width: "200px",
+                  backgroundColor: "crimson",
+                  color: "white",
+                }}
+                onClick={() => handleDeleteClosePopup1("Yes")}
+              >
+                Yes
+              </button>
+              <button
+                style={{ width: "200px" }}
+                onClick={() => handleDeleteClosePopup1("No")}
+              >
+                No
+              </button>
+            </div>
+          </div>
+        </Popup>
+      </div>
           <Chart aspect={3 / 1} title="User Spending ( Last 6 Months)" />
 
         </div>
