@@ -32,11 +32,14 @@ const InsertDataTable = () => {
     }
   };
   const handleAddClosePopup1 = (data) => {
-    if (data === "Yes") {
-      handleDeleteClosePopup();
-    } else {
-      setIsDeletePopupOpen(false);
-    }
+    // if (data === "Yes") {
+    //   handleDeleteClosePopup();
+    //   fetchData()
+    // } else {
+    //   setIsDeletePopupOpen(false);
+    // }
+    setIsAddPopupOpen(false);
+
   };
   const handleDeletePopup = (id) => {
     setIsDeletePopupOpen(true);
@@ -134,7 +137,9 @@ fetch("https://cdn.tauschtakel.de/admin-interest/new", requestOptions)
     handleOpenPopup(id);
   };
   const handleAdd = (id) => {
-    handleOpenPopupAdd();
+    if (!isPopupOpen && !isDeletePopupOpen) {
+      handleOpenPopupAdd();
+    }
   };
   const handleTextInput1Change = (event) => {
     setTextInput1(event.target.value);
