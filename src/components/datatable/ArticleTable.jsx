@@ -144,11 +144,11 @@ fetch("https://cdn.tauschtakel.de/admin-article/delete", requestOptions)
               onClick={() => handleDeleteClick(params.row._id)}
 
             >
-              Delete1
+              Delete
             </div>
             {
               params.row.status === "pending" ? <div
-              className="AButton"
+              className="ABCutton"
               onClick={() => handleApprove(params.row._id)}
             >
               Approve

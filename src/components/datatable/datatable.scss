@@ -107,7 +107,15 @@
       border: 1px dotted rgba(0, 0, 139, 0.596);
       cursor: pointer;
     }
-    
+    // color: green;
+    //   border: 1px dotted rgba(0, 179, 24, 0.6);
+    .view1Button {
+      padding: 2px 5px;
+      border-radius: 5px;
+       color: green;
+      border: 1px dotted rgba(0, 179, 24, 0.6);
+      cursor: pointer;
+    }
     .deleteButton {
       padding: 2px 5px;
       border-radius: 5px;
@@ -138,4 +146,11 @@
   color: green;
   border: 1px dotted rgba(0, 179, 24, 0.6);
   cursor: pointer;
+}
+.ABCutton {
+  padding: 2px 6px;
+      border-radius: 5px;
+      color: green;
+      border: 1px dotted rgba(0, 179, 24, 0.6);
+      cursor: pointer;
 }

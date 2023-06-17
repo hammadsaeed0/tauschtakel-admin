@@ -115,7 +115,7 @@ fetch("https://cdn.tauschtakel.de/admin-article/reject", requestOptions)
             <div
               onClick={() => handleApprove(params.row._id)}
             >
-              <div className="viewButton">Approve</div>
+              <div className="view1Button">Approve</div>
               </div>
             <div
               className="deleteButton"
