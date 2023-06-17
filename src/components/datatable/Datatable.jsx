@@ -136,7 +136,7 @@ fetch("https://cdn.tauschtakel.de/admin-user/approveUser", requestOptions)
             </div>
             {
               params.row.verified === false ? <div
-              className="AButton"
+              className="ABCutton"
               onClick={() => handleApproveUser(params.row._id)}
             >
               Approve

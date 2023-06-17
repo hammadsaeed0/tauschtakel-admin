@@ -34,15 +34,10 @@ const SingleArticle = () => {
   const [like, setLike] = useState();
   const { articleId } = useParams();
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
-  
 
-  useEffect(async () => {
-    // const url = `https://cdn.tauschtakel.de/admin-article/${userId}`;
-
+  const getData = async () => {
     const url = `https://cdn.tauschtakel.de/admin-article/${articleId}`;
-    console.log(articleId);
     const response = await fetch(url);
-
     const text = await response.text();
     let data = JSON.parse(text);
     setEmail(data.article.description);
@@ -61,6 +56,15 @@ const SingleArticle = () => {
     let like = data.article.likers.length;
     setLike(like);
     setcreatedAt(data.article.createdAt);
+  }
+
+  useEffect(async () => {
+    // const url = `https://cdn.tauschtakel.de/admin-article/${userId}`;
+
+    
+
+getData()
+
   }, [articleId]);
 
   const buttonStyle = {
@@ -107,78 +111,81 @@ const SingleArticle = () => {
 
   const handleDelete = () => {
     var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
-var urlencoded = new URLSearchParams();
-urlencoded.append("id", articleId);
+    var urlencoded = new URLSearchParams();
+    urlencoded.append("id", articleId);
 
-var requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  body: urlencoded,
-  redirect: 'follow'
-};
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: urlencoded,
+      redirect: "follow",
+    };
 
-fetch("https://cdn.tauschtakel.de/admin-article/delete", requestOptions)
-  .then(response => response.text())
-  .then(result => {
-    navigate('/article')
-  })
-  .catch(error => console.log('error', error));
-  }
+    fetch("https://cdn.tauschtakel.de/admin-article/delete", requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        navigate("/article");
+      })
+      .catch((error) => console.log("error", error));
+  };
   const handleApprove = (id) => {
     var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
-var urlencoded = new URLSearchParams();
-urlencoded.append("id", id);
+    var urlencoded = new URLSearchParams();
+    urlencoded.append("id", id);
 
-var requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  body: urlencoded,
-  redirect: 'follow'
-};
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: urlencoded,
+      redirect: "follow",
+    };
 
-fetch("https://cdn.tauschtakel.de/admin-article/approve", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
-  }
+    fetch("https://cdn.tauschtakel.de/admin-article/approve", requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        getData()
+      })
+      .catch((error) => console.log("error", error));
+  };
   const handleDeleteClick = () => {
     handleDeletePopup(articleId);
   };
   const handleDeletePopup = () => {
     setIsDeletePopupOpen(true);
- 
   };
   const handleDeleteClosePopup1 = (data) => {
     setIsDeletePopupOpen(false);
-    if(data === "Yes"){
-      handleDelete()
-    }else{
+    if (data === "Yes") {
+      handleDelete();
+    } else {
       setIsDeletePopupOpen(false);
     }
   };
   const handleUnapprove = (id) => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-    
+
     var urlencoded = new URLSearchParams();
     urlencoded.append("id", id);
-    
+
     var requestOptions = {
-      method: 'POST',
+      method: "POST",
       headers: myHeaders,
       body: urlencoded,
-      redirect: 'follow'
+      redirect: "follow",
     };
-    
+
     fetch("https://cdn.tauschtakel.de/admin-article/unApprove", requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
-  }
+      .then((response) => response.text())
+      .then((result) => {
+        getData()
+      })
+      .catch((error) => console.log("error", error));
+  };
   return (
     <div className="single">
       <Sidebar />
@@ -259,139 +266,97 @@ fetch("https://cdn.tauschtakel.de/admin-article/approve", requestOptions)
                 <div className="detailItem">
                   <span className="itemKey">Like: </span>
                   <span className="itemValue">
-                  {like} <span className="itemValue"></span>
+                    {like} <span className="itemValue"></span>
                   </span>
                 </div>
-                <div style={{ width: "10px" , height:'10px'}}></div>{" "}
-
+                <div style={{ width: "10px", height: "10px" }}></div>{" "}
                 {/* Button Section  */}
                 <div style={buttonGroupStyle}>
-                  {/* <Button
-                    variant="outlined"
-                    color="error"
-                    size="small"
-                    style={buttonStyle}
-                    className="lowercase-text"
-                    onClick={() => handleDelete(articleId)}
+                  <div
+                    className="deleteButton"
+                    onClick={() => handleDeleteClick(articleId)}
                   >
-                    <p style={{ textTransform: "capitalize" , fontSize:'14px' }}>Delete</p>
-                  </Button> */}
-                   <div
-              className="deleteButton"
-              // onClick={() => handleDelete(articleId)}
-              onClick={() => handleDeleteClick(articleId)}
-
-
-            >
-              Delete
-            </div>
+                    Delete
+                  </div>
+                  <div style={{ width: "10px" }}></div>{" "}
+                  {status === "pending" ? (
+                    <div
+                      className="sendButton"
+                      onClick={() => handleApprove(articleId)}
+                    >
+                      Approve
+                    </div>
+                  ) : (
+                    <div
+                      className="sendButton2"
+                      onClick={() => handleUnapprove(articleId)}
+                    >
+                      Unapprove
+                    </div>
+                  )}
                   <div style={{ width: "10px" }}></div>{" "}
                   {/* Add space between buttons */}
-                  {/* Add space between buttons */}
-                  {
-                    status === "pending" ?
-                  //   <Button
-                  //   variant="outlined"
-                  //   color="error"
-                  //   size="small"
-                  //   style={buttonStyle3}
-                  //   onClick={() => handleApprove(articleId)}
-
-                  // >
-                  //   <p style={{ textTransform: "capitalize",fontSize:'14px' }}>Approve</p>
-                  // </Button> 
-                  <div
-                  className="sendButton"
-                  onClick={() => handleApprove(articleId)}
-    
-                >
-                  Approve
-                </div>
-
-                  
-                  : 
-                  
-                  // <Button
-                  //   variant="outlined"
-                  //   color="error"
-                  //   size="small"
-                  //   style={buttonStyle2}
-                  //   onClick={() => handleUnapprove(articleId)}
-
-                  // >
-                  //   <p style={{ textTransform: "capitalize" , fontSize:'14px' }}>Unapprove</p>
-                  // </Button>
-                  <div
-                  className="sendButton2"
-                    onClick={() => handleUnapprove(articleId)}
-                  
-    
-                >
-                  Unapprove
-                </div>
-                  }
-                  
-                  <div style={{ width: "10px" }}></div>{" "}
-                  {/* Add space between buttons */}
-                  
                   <div style={{ width: "10px" }}></div>{" "}
                 </div>
               </div>
             </div>
           </div>
           <div className="right">
-          <div style={{ pointerEvents: isDeletePopupOpen ? "none" : "auto" }}>
-        {/* <h1>My Component</h1>
+            <div style={{ pointerEvents: isDeletePopupOpen ? "none" : "auto" }}>
+              {/* <h1>My Component</h1>
       <button onClick={handleOpenPopup}>Open Popup</button> */}
 
-        <Popup open={isDeletePopupOpen} onClose={handleDeleteClosePopup1} modal>
-          <div
-            style={{
-              background: "transparent",
-              padding: "20px",
-              borderRadius: "4px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <div
-              style={{
-                width: "70%",
-                height: "50px",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <button
-                style={{
-                  width: "200px",
-                  backgroundColor: "crimson",
-                  color: "white",
-                }}
-                onClick={() => handleDeleteClosePopup1("Yes")}
+              <Popup
+                open={isDeletePopupOpen}
+                onClose={handleDeleteClosePopup1}
+                modal
               >
-                Yes
-              </button>
-              <button
-                style={{ width: "200px" }}
-                onClick={() => handleDeleteClosePopup1("No")}
-              >
-                No
-              </button>
+                <div
+                  style={{
+                    background: "transparent",
+                    padding: "20px",
+                    borderRadius: "4px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "70%",
+                      height: "50px",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <button
+                      style={{
+                        width: "200px",
+                        backgroundColor: "crimson",
+                        color: "white",
+                      }}
+                      onClick={() => handleDeleteClosePopup1("Yes")}
+                    >
+                      Yes
+                    </button>
+                    <button
+                      style={{ width: "200px" }}
+                      onClick={() => handleDeleteClosePopup1("No")}
+                    >
+                      No
+                    </button>
+                  </div>
+                </div>
+              </Popup>
             </div>
+            <Chart aspect={3 / 1} title="User Spending ( Last 6 Months)" />
           </div>
-        </Popup>
-      </div>
-          <Chart aspect={3 / 1} title="User Spending ( Last 6 Months)" />
-
-        </div>
         </div>
         <div style={{ width: "100%", height: "100%", paddingLeft: "20px" }}>
           <div className="detailItem">
             <span style={{ fontSize: 23, fontWeight: "bold", color: "gray" }}>
-            Description :
+              Description :
             </span>
             <img
               style={{ width: "20px" }}
@@ -424,16 +389,31 @@ fetch("https://cdn.tauschtakel.de/admin-article/approve", requestOptions)
                       }}
                     />
                     <span
-                      style={{ position: "absolute", marginTop:"5px" ,right: "20px" }}
+                      style={{
+                        position: "absolute",
+                        marginTop: "5px",
+                        right: "20px",
+                      }}
                     >
-                      <img style={{width:'20px', height:'20px'}} src={require('../../components/Image/delete.png')} />
+                      <img
+                        style={{ width: "20px", height: "20px" }}
+                        src={require("../../components/Image/delete.png")}
+                      />
                     </span>
                   </div>
                 ))
               ) : (
                 <p>No images available.</p>
               )}
-                <img style={{width:'100px', height:'100px', marginTop:'50px', position: 'relative',}} src={require('../../components/Image/camera.png')} />
+              <img
+                style={{
+                  width: "100px",
+                  height: "100px",
+                  marginTop: "50px",
+                  position: "relative",
+                }}
+                src={require("../../components/Image/camera.png")}
+              />
             </div>
           </div>
         </div>
